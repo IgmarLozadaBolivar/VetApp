@@ -7,5 +7,6 @@ public class Proveedor : BaseEntity
     public string Telefono { get; set; }
     public int IdUserFK { get; set; }
     public User User { get; set; }
+    public ICollection<Medicamento> Medicamentos { get; set; }
     public ICollection<ProveedorMedicamento> ProveedorMedicamentos { get; set; }
 }
