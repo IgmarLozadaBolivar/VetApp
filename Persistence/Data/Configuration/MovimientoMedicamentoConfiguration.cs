@@ -18,8 +18,7 @@ public class MovimientoMedicamentoConfiguration : IEntityTypeConfiguration<Movim
         builder.Property(f => f.Fecha)
         .IsRequired()
         .HasColumnName("Fecha")
-        .HasComment("Fecha del movimiento")
-        .HasColumnType("datetime");
+        .HasComment("Fecha del movimiento");
 
         builder.Property(f => f.Total)
         .IsRequired()

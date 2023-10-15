@@ -19,7 +19,7 @@ public class MedicamentoConfiguration : IEntityTypeConfiguration<Medicamento>
         .IsRequired()
         .HasColumnName("Nombre")
         .HasComment("Nombre del medicamento")
-        .HasColumnType("varchar(50)")
+        .HasColumnType("varchar")
         .HasMaxLength(50);
 
         builder.Property(f => f.Stock)

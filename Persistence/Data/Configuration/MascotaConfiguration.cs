@@ -19,14 +19,13 @@ public class MascotaConfiguration : IEntityTypeConfiguration<Mascota>
         .IsRequired()
         .HasColumnName("Nombre")
         .HasComment("Nombre de la mascota")
-        .HasColumnType("varchar(50)")
+        .HasColumnType("varchar")
         .HasMaxLength(50);
 
         builder.Property(f => f.FechaNac)
         .IsRequired()
         .HasColumnName("Fecha Nacimiento")
-        .HasComment("Fecha de nacimiento de la mascota")
-        .HasColumnType("datetime");
+        .HasComment("Fecha de nacimiento de la mascota");
 
         builder.HasOne(p => p.Propietario)
         .WithMany(p => p.Mascotas)

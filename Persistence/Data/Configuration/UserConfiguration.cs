@@ -19,21 +19,21 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         .IsRequired()
         .HasColumnName("Mail")
         .HasComment("Correo del usuario")
-        .HasColumnType("varchar(50)")
+        .HasColumnType("varchar")
         .HasMaxLength(50);
 
         builder.Property(f => f.Username)
         .IsRequired()
         .HasColumnName("Username")
         .HasComment("Nombre del usuario")
-        .HasColumnType("varchar(50)")
+        .HasColumnType("varchar")
         .HasMaxLength(50);
 
         builder.Property(f => f.Password)
         .IsRequired()
         .HasColumnName("Password")
         .HasComment("Contraseña del usuario")
-        .HasColumnType("varchar(50)")
+        .HasColumnType("varchar")
         .HasMaxLength(50);
 
         builder.HasMany(p => p.Rols)

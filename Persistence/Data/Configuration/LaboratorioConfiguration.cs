@@ -19,21 +19,21 @@ public class LaboratorioConfiguration : IEntityTypeConfiguration<Laboratorio>
         .IsRequired()
         .HasColumnName("Nombre")
         .HasComment("Nombre del laboratorio")
-        .HasColumnType("varchar(50)")
+        .HasColumnType("varchar")
         .HasMaxLength(50);
 
         builder.Property(f => f.Direccion)
         .IsRequired()
         .HasColumnName("Direccion")
         .HasComment("Direccion del laboratorio")
-        .HasColumnType("varchar(50)")
+        .HasColumnType("varchar")
         .HasMaxLength(50);
 
         builder.Property(f => f.Telefono)
         .IsRequired()
         .HasColumnName("Telefono")
         .HasComment("Numero del telefono celular del laboratorio")
-        .HasColumnType("varchar(30)")
+        .HasColumnType("varchar")
         .HasMaxLength(30);
     }
 }

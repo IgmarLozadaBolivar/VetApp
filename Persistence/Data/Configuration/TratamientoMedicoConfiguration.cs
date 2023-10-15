@@ -19,21 +19,21 @@ public class TratamientoMedicoConfiguration : IEntityTypeConfiguration<Tratamien
         .IsRequired()
         .HasColumnName("Dosis")
         .HasComment("Dosis del tratamiento medico")
-        .HasColumnType("varchar(50)")
+        .HasColumnType("varchar")
         .HasMaxLength(50);
 
         builder.Property(f => f.DetalleConsumo)
         .IsRequired()
         .HasColumnName("DetalleConsumo")
         .HasComment("Detalles del consumo de la dosis")
-        .HasColumnType("varchar(150)")
+        .HasColumnType("varchar")
         .HasMaxLength(150);
 
         builder.Property(f => f.Observacion)
         .IsRequired()
         .HasColumnName("Observacion")
         .HasComment("Observaciones del tratamiento medico")
-        .HasColumnType("varchar(150)")
+        .HasColumnType("varchar")
         .HasMaxLength(150);
 
         builder.HasOne(p => p.Cita)

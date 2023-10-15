@@ -19,28 +19,28 @@ public class VeterinarioConfiguration : IEntityTypeConfiguration<Veterinario>
         .IsRequired()
         .HasColumnName("Nombre")
         .HasComment("Nombre del veterinario")
-        .HasColumnType("varchar(50)")
+        .HasColumnType("varchar")
         .HasMaxLength(50);
 
         builder.Property(f => f.Email)
         .IsRequired()
         .HasColumnName("Email")
         .HasComment("Correo electronico del veterinario")
-        .HasColumnType("varchar(150)")
+        .HasColumnType("varchar")
         .HasMaxLength(150);
 
         builder.Property(f => f.Telefono)
         .IsRequired()
         .HasColumnName("Telefono")
         .HasComment("Telefono del veterinario")
-        .HasColumnType("varchar(30)")
+        .HasColumnType("varchar")
         .HasMaxLength(30);
 
         builder.Property(f => f.Especialidad)
         .IsRequired()
         .HasColumnName("Especialidad")
         .HasComment("Especialidad del veterinario")
-        .HasColumnType("varchar(50)")
+        .HasColumnType("varchar")
         .HasMaxLength(50);
 
         builder.HasOne(p => p.User)

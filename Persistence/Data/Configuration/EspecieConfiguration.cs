@@ -19,7 +19,7 @@ public class EspecieConfiguration : IEntityTypeConfiguration<Especie>
         .IsRequired()
         .HasColumnName("Nombre")
         .HasComment("Nombre de la especie")
-        .HasColumnType("varchar(50)")
+        .HasColumnType("varchar")
         .HasMaxLength(50);
     }
 }

@@ -25,19 +25,16 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
         builder.Property(f => f.Expires)
         .IsRequired()
         .HasColumnName("Expires")
-        .HasComment("Expiracion del token")
-        .HasColumnType("datetime");
+        .HasComment("Expiracion del token");
 
         builder.Property(f => f.Created)
         .IsRequired()
         .HasColumnName("Created")
-        .HasComment("Creacion del token")
-        .HasColumnType("datetime");
+        .HasComment("Creacion del token");
 
         builder.Property(f => f.Revoked)
         .IsRequired()
         .HasColumnName("Revoked")
-        .HasComment("Revocacion del token")
-        .HasColumnType("datetime");
+        .HasComment("Revocacion del token");
     }
 }

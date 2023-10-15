@@ -19,7 +19,7 @@ public class RazaConfiguration : IEntityTypeConfiguration<Raza>
         .IsRequired()
         .HasColumnName("Nombre")
         .HasComment("Nombre de la raza")
-        .HasColumnType("varchar(50)")
+        .HasColumnType("varchar")
         .HasMaxLength(50);
 
         builder.HasOne(p => p.Especie)

@@ -19,7 +19,7 @@ public class TipoMovimientoConfiguration : IEntityTypeConfiguration<TipoMovimien
         .IsRequired()
         .HasColumnName("Descripcion")
         .HasComment("Descripcion del tipo de movimiento")
-        .HasColumnType("varchar(150)")
+        .HasColumnType("varchar")
         .HasMaxLength(150);
     }
 }

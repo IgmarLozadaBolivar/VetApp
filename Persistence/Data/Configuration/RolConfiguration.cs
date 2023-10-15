@@ -19,7 +19,7 @@ public class RolConfiguration : IEntityTypeConfiguration<Rol>
         .IsRequired()
         .HasColumnName("Nombre")
         .HasComment("Nombre del rol")
-        .HasColumnType("varchar(50)")
+        .HasColumnType("varchar")
         .HasMaxLength(50);
     }
 }
