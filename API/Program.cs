@@ -1,4 +1,5 @@
 using System.Text;
+using API.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.ConfigureCors();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Administracion Veterinaria", Version = "v1" });
@@ -49,6 +51,8 @@ if (app.Environment.IsDevelopment())
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "VetApp V1");
         });
 }
+
+app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 
