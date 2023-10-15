@@ -52,7 +52,7 @@ public class ProveedorConfiguration : IEntityTypeConfiguration<Proveedor>
 
                    j =>
                    {
-                       j.ToTable("UserRol");
+                       j.ToTable("ProveedorMedicamento");
                        j.HasKey(t => new { t.IdProveedorFK, t.IdMedicamentoFK });
 
                    });
