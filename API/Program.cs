@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddDbContext<DbAppContext>(options =>
 {
-    options.UseNpgsql("Host=localhost;Database=VetDb;User=postgres;Password=1122809631;");
+    options.UseNpgsql("Host=localhost;Database=VetDb;Username=postgres;Password=1122809631");
 });
 
 var app = builder.Build();
