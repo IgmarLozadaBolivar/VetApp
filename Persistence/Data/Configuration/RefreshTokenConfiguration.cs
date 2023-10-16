@@ -19,8 +19,8 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
         .IsRequired()
         .HasColumnName("Token")
         .HasComment("Token del usuario")
-        .HasColumnType("varchar(150)")
-        .HasMaxLength(150);
+        .HasColumnType("varchar")
+        .HasMaxLength(255);
 
         builder.Property(f => f.Expires)
         .IsRequired()
@@ -31,10 +31,5 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
         .IsRequired()
         .HasColumnName("Created")
         .HasComment("Creacion del token");
-
-        builder.Property(f => f.Revoked)
-        .IsRequired()
-        .HasColumnName("Revoked")
-        .HasComment("Revocacion del token");
     }
 }
