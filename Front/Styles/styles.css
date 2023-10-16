@@ -28,7 +28,7 @@ section {
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    background: url('./assets/login.png')no-repeat;
+    background: url('../assets/login.png')no-repeat;
     background-position: center;
     background-size: cover;
 }
@@ -39,7 +39,7 @@ section {
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    background: url('./assets/register.jpeg')no-repeat;
+    background: url('../assets/register.png')no-repeat;
     background-position: center;
     background-size: cover;
 }
@@ -129,11 +129,11 @@ input:valid~label {
 }
 
 #boton {
-    color: #d77b33;
+    color: #00C4FF;
 }
 
 #botonRegistro {
-    color: #ce52d6;
+    color: #a765c8;
 }
 
 button {
@@ -151,12 +151,12 @@ button {
 
 #boton:hover {
     color: #fff;
-    background: #d77b33;
+    background: linear-gradient(40deg, #f17931, #df4254, #00C4FF);
 }
 
 #botonRegistro:hover {
     color: #fff;
-    background: #ce52d6;
+    background: linear-gradient(40deg, #12afb8, #a765c8, #f6a450);
 }
 
 .register {
@@ -173,5 +173,6 @@ button {
 }
 
 .register p a:hover {
+    cursor: pointer;
     text-decoration: underline;
 }
