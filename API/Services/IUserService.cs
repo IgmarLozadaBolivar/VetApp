@@ -5,4 +5,5 @@ public interface IUserService
 {
     Task<UserResponse> Registrar(UserRequest request);
     Task<UserResponse> Loguear(UserRequest request);
+    Task<TokenResponse> ValidarToken(TokenRequest request);
 }

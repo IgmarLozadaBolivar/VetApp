@@ -50,14 +50,27 @@ public class UserService : IUserService
                 x.Username == request.Username &&
                 x.Password == request.Password
             );
+
         if (usuarioEncontrado != null)
         {
             string tokenCreado = GenerarToken(usuarioEncontrado.Id.ToString());
-            return new UserResponse { Result = true, Token = tokenCreado, Msg = "Tu inicio de sesión fue exitoso!" };
+
+            var refreshToken = new RefreshToken
+            {
+                IdUserFK = usuarioEncontrado.Id,
+                Token = tokenCreado,
+                Expires = DateTime.UtcNow.AddMinutes(5),
+                Created = DateTime.UtcNow,
+            };
+
+            _context.RefreshTokens.Add(refreshToken);
+            await _context.SaveChangesAsync();
+
+            return new UserResponse { Result = true, Token = tokenCreado, Msg = "Tu inicio de sesion fue exitoso!" };
         }
         else
         {
-            return new UserResponse { Result = false, Msg = "Credenciales de inicio de sesión incorrectas!" };
+            return new UserResponse { Result = false, Msg = "Credenciales de inicio de sesion incorrectas!" };
         }
     }
 
@@ -87,5 +100,22 @@ public class UserService : IUserService
         string tokenCreado = tokenHeadler.WriteToken(tokenConfig);
 
         return tokenCreado;
+    }
+
+    public async Task<TokenResponse> ValidarToken(TokenRequest request)
+    {
+        var tokenEncontrado = await _context.RefreshTokens
+            .FirstOrDefaultAsync(x =>
+                x.Token == request.Token
+            );
+        if (tokenEncontrado != null)
+        {
+            string tokenCreado = GenerarToken(tokenEncontrado.Id.ToString());
+            return new TokenResponse { Result = true, Msg = "Tu token es valido!" };
+        }
+        else
+        {
+            return new TokenResponse { Result = false, Msg = "Tu token ingresado es invalido!" };
+        }
     }
 }

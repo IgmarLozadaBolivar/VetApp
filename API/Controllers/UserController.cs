@@ -55,4 +55,20 @@ public class UserController : Controller
             return Unauthorized(new { result = response.Result, message = response.Msg });
         }
     }
+
+    [HttpPost("validarToken")]
+    public async Task<IActionResult> ValidarToken([FromBody] TokenRequest request)
+    {
+        var response = await _userService.ValidarToken(request);
+
+        if (response.Result)
+        {
+            
+            return Ok(response);
+        }
+        else
+        {
+            return BadRequest(response);
+        }
+    }
 }
