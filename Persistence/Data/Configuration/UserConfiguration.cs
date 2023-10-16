@@ -13,7 +13,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(f => f.Id)
         .IsRequired()
-        .HasMaxLength(3);
+        .HasDefaultValueSql("substring(encode(gen_random_uuid()::uuid, 'hex'), 1, 7)");
 
         builder.Property(f => f.Mail)
         .IsRequired()
