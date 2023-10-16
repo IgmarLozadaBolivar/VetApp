@@ -31,7 +31,7 @@ public class UserService : IUserService
 
         var newUser = new User
         {
-            Mail = request.Mail,
+            Mail = request.Email,
             Username = request.Username,
             Password = request.Password
         };

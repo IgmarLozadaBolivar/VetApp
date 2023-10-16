@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Persistence;
 namespace API.Controllers;
 
-public class UserController : ControllerBase
+[Route("[controller]")]
+public class UserController : Controller
 {
     private readonly DbAppContext _context;
     private readonly IUserService _userService;

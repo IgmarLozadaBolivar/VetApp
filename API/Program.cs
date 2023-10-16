@@ -1,5 +1,6 @@
 using System.Text;
 using API.Extensions;
+using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -10,17 +11,39 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.ConfigureCors();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Administracion Veterinaria", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "VetApp", Description = "API description in Markdown." ,Version = "v1" });
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Ingrese un token para autorizar",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
 });
+builder.Services.ConfigureCors();
 builder.Services.AddDbContext<DbAppContext>(options =>
 {
     options.UseNpgsql("Host=localhost;Database=VetDb;Username=postgres;Password=1122809631");
 });
-
-var app = builder.Build();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var key = builder.Configuration.GetValue<string>("JwtSettings:Key");
 var keyBytes = Encoding.ASCII.GetBytes(key);
@@ -43,13 +66,15 @@ builder.Services.AddAuthentication(config =>
     };
 });
 
+var app = builder.Build();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c =>
-        {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "VetApp V1");
-        });
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Administracion Veterinaria App V1");
+    });
 }
 
 app.UseCors("CorsPolicy");
