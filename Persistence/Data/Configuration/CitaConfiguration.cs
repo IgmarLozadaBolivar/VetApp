@@ -13,7 +13,7 @@ public class CitaConfiguration : IEntityTypeConfiguration<Cita>
 
         builder.Property(f => f.Id)
         .IsRequired()
-        .HasDefaultValueSql("substring(encode(gen_random_uuid()::uuid, 'hex'), 1, 7)");
+        .HasDefaultValueSql("substring(gen_random_uuid()::text, 1, 7)");
 
         builder.Property(f => f.Fecha)
         .IsRequired()
