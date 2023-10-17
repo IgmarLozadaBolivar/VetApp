@@ -1,5 +1,8 @@
+using API.Dtos;
 using API.Models;
 using API.Services;
+using AutoMapper;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Persistence;
 namespace API.Controllers;
@@ -9,11 +12,37 @@ public class UserController : Controller
 {
     private readonly DbAppContext _context;
     private readonly IUserService _userService;
+    private readonly IUnitOfWork unitOfWork;
+    private readonly IMapper mapper;
 
-    public UserController(IUserService userService, DbAppContext context)
+    public UserController(IUserService userService, DbAppContext context, IUnitOfWork unitOfWork, IMapper mapper)
     {
         _userService = userService;
         _context = context;
+        this.unitOfWork = unitOfWork;
+        this.mapper = mapper;
+    }
+
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<UserDto>>> Get()
+    {
+        var users = await unitOfWork.Users.GetAllAsync();
+        return mapper.Map<List<UserDto>>(users);
+    }
+
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<UserDto>> Get(string id)
+    {
+        var user = await unitOfWork.Users.GetByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+        return this.mapper.Map<UserDto>(user);
     }
 
     [HttpPost("registrar")]
@@ -33,6 +62,32 @@ public class UserController : Controller
         else
         {
             return BadRequest(resultRegister);
+        }
+    }
+
+    [HttpPost("asignar-rol")]
+    public async Task<ActionResult<RolResponse>> AsignarRolAUsuario([FromBody] RolRequest request)
+    {
+        try
+        {
+            var response = await _userService.AsignarRolAUsuario(request);
+
+            if (response.Result)
+            {
+                return Ok(response);
+            }
+            else
+            {
+                return BadRequest(response);
+            }
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new RolResponse
+            {
+                Result = false,
+                Msg = "Error interno del servidor"
+            });
         }
     }
 
@@ -63,7 +118,7 @@ public class UserController : Controller
 
         if (response.Result)
         {
-            
+
             return Ok(response);
         }
         else
