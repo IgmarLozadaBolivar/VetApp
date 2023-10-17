@@ -6,7 +6,7 @@ public class Propietario : BaseEntity
     public string Email { get; set; }
     public string Telefono { get; set; }
     public string IdUserFK { get; set; }
-    public User User { get; set; }
+    public User Users { get; set; }
     public ICollection<Mascota> Mascotas { get; set; }
     public ICollection<MovimientoMedicamento> MovimientoMedicamentos { get; set; }
 }

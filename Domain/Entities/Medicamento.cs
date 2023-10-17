@@ -6,7 +6,7 @@ public class Medicamento : BaseEntity
     public int Stock { get; set; }
     public decimal Precio { get; set; }
     public string IdLaboratorioFK { get; set; }
-    public Laboratorio Laboratorio { get; set; }
+    public Laboratorio Laboratorios { get; set; }
     public ICollection<Proveedor> Proveedores { get; set; }
     public ICollection<MovimientoMedicamento> MovimientoMedicamentos { get; set; }
     public ICollection<DetalleMovimiento> DetalleMovimientos { get; set; }
