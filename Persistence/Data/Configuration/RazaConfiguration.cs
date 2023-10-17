@@ -22,7 +22,7 @@ public class RazaConfiguration : IEntityTypeConfiguration<Raza>
         .HasColumnType("varchar")
         .HasMaxLength(50);
 
-        builder.HasOne(p => p.Especie)
+        builder.HasOne(p => p.Especies)
         .WithMany(p => p.Razas)
         .HasForeignKey(p => p.IdEspecieFK);
     }

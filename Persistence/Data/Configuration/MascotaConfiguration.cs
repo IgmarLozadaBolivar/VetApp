@@ -27,15 +27,15 @@ public class MascotaConfiguration : IEntityTypeConfiguration<Mascota>
         .HasColumnName("Fecha Nacimiento")
         .HasComment("Fecha de nacimiento de la mascota");
 
-        builder.HasOne(p => p.Propietario)
+        builder.HasOne(p => p.Propietarios)
         .WithMany(p => p.Mascotas)
         .HasForeignKey(p => p.IdPropietarioFK);
 
-        builder.HasOne(p => p.Especie)
+        builder.HasOne(p => p.Especies)
         .WithMany(p => p.Mascotas)
         .HasForeignKey(p => p.IdEspecieFK);
 
-        builder.HasOne(p => p.Raza)
+        builder.HasOne(p => p.Razas)
         .WithMany(p => p.Mascotas)
         .HasForeignKey(p => p.IdRazaFK);
     }

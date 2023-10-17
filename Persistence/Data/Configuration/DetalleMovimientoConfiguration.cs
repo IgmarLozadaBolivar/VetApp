@@ -27,11 +27,11 @@ public class DetalleMovimientoConfiguration : IEntityTypeConfiguration<DetalleMo
         .HasComment("Precio del movimiento")
         .HasColumnType("decimal");
 
-        builder.HasOne(p => p.Medicamento)
+        builder.HasOne(p => p.Medicamentos)
         .WithMany(p => p.DetalleMovimientos)
         .HasForeignKey(p => p.IdMedicamentoFK);
 
-        builder.HasOne(p => p.MovimientoMedicamento)
+        builder.HasOne(p => p.MovimientoMedicamentos)
         .WithMany(p => p.DetalleMovimientos)
         .HasForeignKey(p => p.IdMovMedFK);
     }

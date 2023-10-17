@@ -34,11 +34,11 @@ public class CitaConfiguration : IEntityTypeConfiguration<Cita>
         .HasColumnType("varchar")
         .HasMaxLength(150);
 
-        builder.HasOne(p => p.Mascota)
+        builder.HasOne(p => p.Mascotas)
         .WithMany(p => p.Citas)
         .HasForeignKey(p => p.IdMascotaFK);
 
-        builder.HasOne(p => p.Veterinario)
+        builder.HasOne(p => p.Veterinarios)
         .WithMany(p => p.Citas)
         .HasForeignKey(p => p.IdVeterinarioFK);
     }

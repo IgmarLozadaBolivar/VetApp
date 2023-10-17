@@ -34,7 +34,7 @@ public class MedicamentoConfiguration : IEntityTypeConfiguration<Medicamento>
         .HasComment("Precio del medicamento")
         .HasColumnType("decimal");
 
-        builder.HasOne(p => p.Laboratorio)
+        builder.HasOne(p => p.Laboratorios)
         .WithMany(p => p.Medicamentos)
         .HasForeignKey(p => p.IdLaboratorioFK);
     }

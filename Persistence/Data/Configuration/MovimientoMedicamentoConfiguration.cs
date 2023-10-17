@@ -26,15 +26,15 @@ public class MovimientoMedicamentoConfiguration : IEntityTypeConfiguration<Movim
         .HasComment("Total del movimiento")
         .HasColumnType("int");
 
-        builder.HasOne(p => p.Medicamento)
+        builder.HasOne(p => p.Medicamentos)
         .WithMany(p => p.MovimientoMedicamentos)
         .HasForeignKey(p => p.IdMedicamentoFK);
 
-        builder.HasOne(p => p.Propietario)
+        builder.HasOne(p => p.Propietarios)
         .WithMany(p => p.MovimientoMedicamentos)
         .HasForeignKey(p => p.IdPropietarioFK);
 
-        builder.HasOne(p => p.TipoMovimiento)
+        builder.HasOne(p => p.TipoMovimientos)
         .WithMany(p => p.MovimientoMedicamentos)
         .HasForeignKey(p => p.IdTipoMovimientoFK);
     }

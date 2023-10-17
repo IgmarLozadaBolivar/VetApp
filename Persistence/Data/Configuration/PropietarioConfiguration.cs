@@ -36,7 +36,7 @@ public class PropietarioConfiguration : IEntityTypeConfiguration<Propietario>
         .HasColumnType("varchar")
         .HasMaxLength(30);
 
-        builder.HasOne(p => p.User)
+        builder.HasOne(p => p.Users)
         .WithMany(p => p.Propietarios)
         .HasForeignKey(p => p.IdUserFK);
     }

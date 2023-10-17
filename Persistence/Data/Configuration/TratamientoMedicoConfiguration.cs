@@ -36,11 +36,11 @@ public class TratamientoMedicoConfiguration : IEntityTypeConfiguration<Tratamien
         .HasColumnType("varchar")
         .HasMaxLength(150);
 
-        builder.HasOne(p => p.Cita)
+        builder.HasOne(p => p.Citas)
         .WithMany(p => p.TratamientoMedicos)
         .HasForeignKey(p => p.IdCitaFK);
 
-        builder.HasOne(p => p.Medicamento)
+        builder.HasOne(p => p.Medicamentos)
         .WithMany(p => p.TratamientoMedicos)
         .HasForeignKey(p => p.IdMedicamentoFK);
     }
