@@ -43,6 +43,50 @@ public class UserService : IUserService
         return new UserResponse { Result = true, Msg = "Tu registro fue exitoso!" };
     }
 
+    public async Task<RolResponse> AsignarRolAUsuario(RolRequest request)
+    {
+        try
+        {
+            var usuario = await _context.Users.FindAsync(request.IdUser);
+            var rol = await _context.Rols.FindAsync(request.IdRol);
+
+            if (usuario != null && rol != null)
+            {
+                var userRol = new UserRol
+                {
+                    IdUserFK = request.IdUser,
+                    IdRolFK = request.IdRol
+                };
+
+                _context.UserRols.Add(userRol);
+                await _context.SaveChangesAsync();
+
+                return new RolResponse
+                {
+                    Result = true,
+                    RolAsignado = rol.Nombre,
+                    Msg = "Rol asignado correctamente!"
+                };
+            }
+            else
+            {
+                return new RolResponse
+                {
+                    Result = false,
+                    Msg = "No se pudo asignar el rol, usuario o rol no encontrados!"
+                };
+            }
+        }
+        catch (Exception)
+        {
+            return new RolResponse
+            {
+                Result = false,
+                Msg = "Hubo un error al asignar el rol!"
+            };
+        }
+    }
+
     public async Task<UserResponse> Loguear(UserRequest request)
     {
         var usuarioEncontrado = await _context.Users
