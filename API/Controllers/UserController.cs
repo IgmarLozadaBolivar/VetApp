@@ -25,7 +25,6 @@ public class UserController : Controller
     }
 
     [HttpGet]
-    [Authorize(Roles = "Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<UserDto>>> Get()
@@ -35,7 +34,6 @@ public class UserController : Controller
     }
 
     [HttpGet("{id}")]
-    [Authorize(Roles = "Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<UserDto>> Get(string id)
@@ -49,7 +47,6 @@ public class UserController : Controller
     }
 
     [HttpPost("registrar")]
-    [Authorize(Roles = "Administrador, Usuario")]
     public async Task<IActionResult> RegistrarUsuario([FromBody] UserRequest request)
     {
         if (!ModelState.IsValid)
@@ -70,7 +67,6 @@ public class UserController : Controller
     }
 
     [HttpPost("asignar-rol")]
-    [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<RolResponse>> AsignarRolAUsuario([FromBody] RolRequest request)
     {
         try
@@ -97,7 +93,6 @@ public class UserController : Controller
     }
 
     [HttpPost("loguear")]
-    [Authorize(Roles = "Administrador, Empleado, Usuario")]
     public async Task<IActionResult> LoguearUsuario([FromBody] UserRequest request)
     {
         if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password))
@@ -118,7 +113,6 @@ public class UserController : Controller
     }
 
     [HttpPost("validarToken")]
-    [Authorize(Roles = "Administrador, Empleado, Usuario")]
     public async Task<IActionResult> ValidarToken([FromBody] TokenRequest request)
     {
         var response = await _userService.ValidarToken(request);
