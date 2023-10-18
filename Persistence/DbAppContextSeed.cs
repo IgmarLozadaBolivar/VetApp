@@ -88,7 +88,7 @@ public class DbAppContextSeed
                     }
                 }
             }
-            /* if (!context.Users.Any())
+            if (!context.Users.Any())
             {
                 using (var reader = new StreamReader(ruta + @"/Data/Csv/User.csv"))
                 {
@@ -99,7 +99,7 @@ public class DbAppContextSeed
                         await context.SaveChangesAsync();
                     }
                 }
-            } */
+            }
             if (!context.Laboratorios.Any())
             {
                 using (var reader = new StreamReader(ruta + @"/Data/Csv/Laboratorio.csv"))
@@ -320,7 +320,7 @@ public class DbAppContextSeed
                     }
                 }
             }
-            /* if (!context.UserRols.Any())
+            if (!context.UserRols.Any())
             {
                 using (var reader = new StreamReader(ruta + @"\Data\Csv\UserRol.csv"))
                 {
@@ -344,7 +344,7 @@ public class DbAppContextSeed
                         await context.SaveChangesAsync();
                     }
                 }
-            } */
+            }
             //fin de las insersiones en la db
         }
         catch (Exception ex)
