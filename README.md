@@ -33,8 +33,8 @@
 - Falta por mencionar mas...
 
 <!-- Seccion 3 -->
-<h4>Realizar las siguientes consultas Principales:</h4>
-<h3>Grupo A:</h3>
+<h3>Realizar las siguientes consultas Principales:</h3>
+<h4>Grupo A:</h4>
 - Crear un consulta que permita visualizar los veterinarios cuya especialidad sea Cirujano vascular ✔ <br>
 - Listar los medicamentos que pertenezcan a el laboratorio Genfar. ✔ <br>
 - Mostrar las mascotas que se encuentren registradas cuya especie sea felina. ✔ <br>
@@ -42,7 +42,7 @@
 - Listar los medicamentos que tenga un precio de venta mayor a 50000. ✔ <br>
 - Listar las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023. ✔ <br>
 
-<h3>Grupo B:</h3>
+<h5>Grupo B:</h5>
 - Listar todas las mascotas agrupadas por especie. ✔ <br>
 - Listar todos los movimientos de medicamentos y el valor total de cada movimiento. ✔ <br>
 - Listar las mascotas que fueron atendidas por un determinado veterinario. ✔ <br>
