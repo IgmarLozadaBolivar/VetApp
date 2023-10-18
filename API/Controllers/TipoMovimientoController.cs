@@ -3,6 +3,7 @@ using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
@@ -22,6 +23,7 @@ public class TipoMovimientoController : BaseApiController
 
     [HttpGet]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<TipoMovimientoDto>>> Get()
@@ -31,6 +33,7 @@ public class TipoMovimientoController : BaseApiController
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<TipoMovimientoDto>> Get(string id)
@@ -43,7 +46,8 @@ public class TipoMovimientoController : BaseApiController
         return this.mapper.Map<TipoMovimientoDto>(tipoMovimiento);
     }
 
-    [HttpGet("api/Many11")]
+    [HttpGet]
+    [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -55,6 +59,7 @@ public class TipoMovimientoController : BaseApiController
     }
 
     [HttpPost]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<TipoMovimientoDto>> Post(TipoMovimientoDto tipoMovimientoDto)
@@ -71,6 +76,7 @@ public class TipoMovimientoController : BaseApiController
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -87,6 +93,7 @@ public class TipoMovimientoController : BaseApiController
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(string id)

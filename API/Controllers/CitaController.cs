@@ -3,6 +3,7 @@ using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
@@ -21,6 +22,7 @@ public class CitaController : BaseApiController
     }
 
     [HttpGet]
+    [Authorize(Roles = "Administrador, Empleado")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -31,6 +33,7 @@ public class CitaController : BaseApiController
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<CitaDto>> Get(string id)
@@ -43,7 +46,8 @@ public class CitaController : BaseApiController
         return mapper.Map<CitaDto>(cita);
     }
 
-    [HttpGet("api/Cita11")]
+    [HttpGet]
+    [Authorize(Roles = "Administrador, Empleado")]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -63,6 +67,7 @@ public class CitaController : BaseApiController
     }
 
     [HttpPost]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<CitaDto>> Post(CitaDto citaDto)
@@ -79,6 +84,7 @@ public class CitaController : BaseApiController
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -95,6 +101,7 @@ public class CitaController : BaseApiController
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(string id)

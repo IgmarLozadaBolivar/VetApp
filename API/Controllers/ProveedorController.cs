@@ -3,6 +3,7 @@ using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
@@ -22,6 +23,7 @@ public class ProveedorController : BaseApiController
 
     [HttpGet]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<ProveedorDto>>> Get()
@@ -31,6 +33,7 @@ public class ProveedorController : BaseApiController
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<ProveedorDto>> Get(string id)
@@ -43,7 +46,8 @@ public class ProveedorController : BaseApiController
         return this.mapper.Map<ProveedorDto>(proveedor);
     }
 
-    [HttpGet("api/Many11")]
+    [HttpGet]
+    [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -55,6 +59,7 @@ public class ProveedorController : BaseApiController
     }
 
     [HttpGet("medicamentosPorProveedor")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> MedicamentosPorProveedor()
@@ -65,6 +70,7 @@ public class ProveedorController : BaseApiController
     }
 
     [HttpPost]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -82,6 +88,7 @@ public class ProveedorController : BaseApiController
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -99,6 +106,7 @@ public class ProveedorController : BaseApiController
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(string id)

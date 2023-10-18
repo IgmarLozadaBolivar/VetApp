@@ -4,7 +4,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-[Authorize]
+[Authorize(Roles = "Administrador, Empleado")]
 
 public class WeatherForecastController : ControllerBase
 {

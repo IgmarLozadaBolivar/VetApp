@@ -3,6 +3,7 @@ using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
@@ -21,6 +22,7 @@ public class MascotaController : BaseApiController
     }
 
     [HttpGet]
+    [Authorize(Roles = "Administrador, Empleado")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -31,6 +33,7 @@ public class MascotaController : BaseApiController
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<MascotaDto>> Get(string id)
@@ -43,7 +46,8 @@ public class MascotaController : BaseApiController
         return mapper.Map<MascotaDto>(mascota);
     }
 
-    [HttpGet("api/Many11")]
+    [HttpGet]
+    [Authorize(Roles = "Administrador, Empleado")]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -64,6 +68,7 @@ public class MascotaController : BaseApiController
     }
 
     [HttpGet("especieFelina")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<MascotaDto>>> MascotasEspeciesFelinas()
@@ -73,6 +78,7 @@ public class MascotaController : BaseApiController
     }
 
     [HttpGet("mascotasVacunadasPrimerTrimestre2023")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<MascotaDto>>> MascotasVacunacionPrimerTrimestre2023()
@@ -82,6 +88,7 @@ public class MascotaController : BaseApiController
     }
 
     [HttpGet("EspeciesMascotas")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> EspeciesMascotas()
@@ -92,6 +99,7 @@ public class MascotaController : BaseApiController
     }
 
     [HttpGet("mascotaAtendidaPorVeterinario")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> MascotaAtendidaPorVeterinario()
@@ -102,6 +110,7 @@ public class MascotaController : BaseApiController
     }
 
     [HttpGet("razasCantidadMascotas")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> RazasCantidadMascotas()
@@ -112,6 +121,7 @@ public class MascotaController : BaseApiController
     }
 
     [HttpPost]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -129,6 +139,7 @@ public class MascotaController : BaseApiController
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -146,6 +157,7 @@ public class MascotaController : BaseApiController
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(string id)

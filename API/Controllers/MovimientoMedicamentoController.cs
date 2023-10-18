@@ -3,6 +3,7 @@ using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
@@ -22,6 +23,7 @@ public class MovimientoMedicamentoController : BaseApiController
 
     [HttpGet]
     [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<MovimientoMedicamentoDto>>> Get()
@@ -31,6 +33,7 @@ public class MovimientoMedicamentoController : BaseApiController
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<MovimientoMedicamentoDto>> Get(string id)
@@ -43,7 +46,8 @@ public class MovimientoMedicamentoController : BaseApiController
         return mapper.Map<MovimientoMedicamentoDto>(movimientoMedicamento);
     }
 
-    [HttpGet("api/Many11")]
+    [HttpGet]
+    [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -64,6 +68,7 @@ public class MovimientoMedicamentoController : BaseApiController
     }
 
     [HttpGet("totalMovimiento")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> TotalCadaMovimiento()
@@ -74,6 +79,7 @@ public class MovimientoMedicamentoController : BaseApiController
     }
 
     [HttpPost]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -91,6 +97,7 @@ public class MovimientoMedicamentoController : BaseApiController
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -108,6 +115,7 @@ public class MovimientoMedicamentoController : BaseApiController
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(string id)
