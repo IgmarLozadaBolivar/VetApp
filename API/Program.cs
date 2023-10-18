@@ -27,12 +27,12 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "VetApp", Description = "API description in Markdown.", Version = "v1" });
     c.SwaggerDoc("v1.1", new OpenApiInfo { Title = "VetApp", Description = "API description in Markdown.", Version = "v1.1" });
 
-    c.AddSecurityDefinition("BasicAuth", new OpenApiSecurityScheme
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "Ingrese un token para autorizar",
         Type = SecuritySchemeType.Http,
-        Scheme = "basic",
-        //BearerFormat = "JWT"
+        Scheme = "bearer",
+        BearerFormat = "JWT"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -43,7 +43,7 @@ builder.Services.AddSwaggerGen(c =>
                 Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,
-                    Id = "BasicAuth"
+                    Id = "Bearer"
                 }
             },
             Array.Empty<string>()
@@ -64,7 +64,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 var key = builder.Configuration.GetValue<string>("JwtSettings:Key");
 var keyBytes = Encoding.ASCII.GetBytes(key);
 
-/* builder.Services.AddAuthentication(config =>
+builder.Services.AddAuthentication(config =>
 {
     config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -81,7 +81,7 @@ var keyBytes = Encoding.ASCII.GetBytes(key);
         ValidateLifetime = true,
         ClockSkew = TimeSpan.Zero
     };
-}); */
+});
 
 var app = builder.Build();
 
