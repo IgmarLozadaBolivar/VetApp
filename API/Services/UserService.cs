@@ -90,6 +90,7 @@ public class UserService : IUserService
     public async Task<UserResponse> Loguear(UserRequest request)
     {
         var usuarioEncontrado = await _context.Users
+            .Include(u => u.Rols)
             .FirstOrDefaultAsync(x =>
                 x.Username == request.Username &&
                 x.Password == request.Password
@@ -97,7 +98,8 @@ public class UserService : IUserService
 
         if (usuarioEncontrado != null)
         {
-            string tokenCreado = GenerarToken(usuarioEncontrado.Id.ToString());
+            var roles = usuarioEncontrado.Rols.Select(r => r.Nombre).ToList();
+            string tokenCreado = GenerarToken(usuarioEncontrado.Id.ToString(), roles);
 
             var refreshToken = new RefreshToken
             {
@@ -118,7 +120,7 @@ public class UserService : IUserService
         }
     }
 
-    private string GenerarToken(string idUser)
+    private string GenerarToken(string idUser, List<string> roles)
     {
         var Key = _configuration.GetValue<string>("JwtSettings:Key");
         var keyBytes = Encoding.ASCII.GetBytes(Key);
@@ -130,6 +132,11 @@ public class UserService : IUserService
             new SymmetricSecurityKey(keyBytes),
             SecurityAlgorithms.HmacSha256Signature
         );
+
+        foreach (var role in roles)
+        {
+            claims.AddClaim(new Claim(ClaimTypes.Role, role));
+        }
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -154,7 +161,12 @@ public class UserService : IUserService
             );
         if (tokenEncontrado != null)
         {
-            string tokenCreado = GenerarToken(tokenEncontrado.Id.ToString());
+
+            var user = await _context.Users.FindAsync(tokenEncontrado.IdUserFK);
+            var roles = user.Rols.Select(r => r.Nombre).ToList();
+
+            string tokenCreado = GenerarToken(tokenEncontrado.Id.ToString(), roles);
+            
             return new TokenResponse { Result = true, Msg = "Tu token es valido!" };
         }
         else
