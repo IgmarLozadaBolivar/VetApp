@@ -105,7 +105,7 @@ public class UserService : IUserService
             {
                 IdUserFK = usuarioEncontrado.Id,
                 Token = tokenCreado,
-                Expires = DateTime.UtcNow.AddMinutes(5),
+                Expires = DateTime.UtcNow.AddMinutes(1),
                 Created = DateTime.UtcNow,
             };
 
@@ -166,12 +166,40 @@ public class UserService : IUserService
             var roles = user.Rols.Select(r => r.Nombre).ToList();
 
             string tokenCreado = GenerarToken(tokenEncontrado.Id.ToString(), roles);
-            
+
             return new TokenResponse { Result = true, Msg = "Tu token es valido!" };
         }
         else
         {
             return new TokenResponse { Result = false, Msg = "Tu token ingresado es invalido!" };
         }
+    }
+
+    /* private async Task<RefreshTokenResponse> GuardarRefreshToken(
+        string idUser,
+        string token
+    ); */
+
+    public async Task<RefreshTokenResponse> DevolverTokenRefresh(RefreshTokenRequest refreshTokenRequest, string idUser)
+    {
+        var refreshTokenEncontrado = _context.RefreshTokens.FirstOrDefault(x =>
+            x.Token == refreshTokenRequest.TokenExpirado &&
+            x.IdUserFK == idUser);
+
+        if (refreshTokenEncontrado == null)
+            return new RefreshTokenResponse { Result = false, Msg = "No existe el token ingresado" };
+
+        var user = await _context.Users.FindAsync(refreshTokenEncontrado.IdUserFK);
+        var roles = user.Rols.Select(r => r.Nombre).ToList();
+        var tokenCreado = GenerarToken(idUser, roles);
+
+        var response = new RefreshTokenResponse
+        {
+            Result = true,
+            Token = tokenCreado,
+            Msg = "TokenRefresh generado correctamente!"
+        };
+
+        return response;
     }
 }
