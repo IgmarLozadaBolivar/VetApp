@@ -27,7 +27,7 @@
 
 <!-- Seccion 2 -->
 <h3>Requerimientos funcionales:</h3>
-𐤏 Autenticación y autorizacion:
+𐤏 Autenticación y autorizacion: <br>
   ◦ El sistema debe implementar protección en los endpoints utilizando JWT (JSON Web Tokens). El token tiene una duracion de 1 minuto. ✖ <br>
   ◦ Se debe implementar refresh token. ✖ <br>
   ◦ Debe restringir las peticiones a los endpoints según los roles de los usuarios. ✖ <br>
