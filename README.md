@@ -26,23 +26,16 @@
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"><br>
 
 <!-- Seccion 2 -->
-<h4>Dependencias utilizadas:</h4>
-- Microsoft.AspNetCore.Authentication.JwtBearer - v7.0.11<br>
-- System.IdentityModel.Tokens.Jwt - v7.0.2<br>
-- Npgsql.EntityFrameworkCore.PostgreSQL - v7.0.12<br>
-- Falta por mencionar mas...
-
-<!-- Seccion 3 -->
 <h3>Realizar las siguientes consultas Principales:</h3>
 <h4>Grupo A:</h4>
 - Crear un consulta que permita visualizar los veterinarios cuya especialidad sea Cirujano vascular ✔ <br>
 - Listar los medicamentos que pertenezcan a el laboratorio Genfar. ✔ <br>
 - Mostrar las mascotas que se encuentren registradas cuya especie sea felina. ✔ <br>
-- Listar los propietarios y sus mascotas.. ✔ <br>
+- Listar los propietarios y sus mascotas. ✔ <br>
 - Listar los medicamentos que tenga un precio de venta mayor a 50000. ✔ <br>
 - Listar las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023. ✔ <br>
 
-<h5>Grupo B:</h5>
+<h4>Grupo B:</h4>
 - Listar todas las mascotas agrupadas por especie. ✔ <br>
 - Listar todos los movimientos de medicamentos y el valor total de cada movimiento. ✔ <br>
 - Listar las mascotas que fueron atendidas por un determinado veterinario. ✔ <br>
@@ -50,6 +43,27 @@
 - Listar las mascotas y sus propietarios cuya raza sea Golden Retriver. ✔ <br>
 - Listar la cantidad de mascotas que pertenecen a una raza a una raza. ✔ <br>
 Nota: Se debe mostrar una lista de las razas y la cantidad de mascotas que pertenecen a la raza. ⚠
+
+<!-- Seccion 3 -->
+<h3>Dependencias o paquetes Nuget utilizados:</h3>
+<h4>API</h4>
+- Serilog.AspNetCore - v7.0.0 <br>
+- AspNetCoreRateLimit - v5.0.0 <br>
+- System.IdentityModel.Tokens.Jwt - v7.0.2 <br>
+- Microsoft.AspNetCore.Mvc.Versioning - v5.1.0 <br>
+- Microsoft.EntityFrameworkCore.Design - v7.0.12 <br>
+- Microsoft.AspNetCore.Authentication.JwtBearer - v7.0.12 <br>
+- AutoMapper.Extensions.Microsoft.DependencyInjection - v12.0.1 <br>
+
+<h4>Domain</h4>
+- itext7.pdfhtml - v5.0.1 <br>
+- FluentValidation.AspNetCore - v11.3.0 <br>
+- Microsoft.EntityFrameworkCore - v7.0.12 <br>
+
+<h4>Persistence</h4>
+- CsvHelper - v30.0.1 <br>
+- Microsoft.EntityFrameworkCore - v7.0.12 <br>
+- Npgsql.EntityFrameworkCore.PostgreSQL - v7.0.11 <br>
 
 <!-- Footer -->
 <h5>Autores:</h5>
