@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using API.Dtos;
 using API.Models;
 using API.Services;
@@ -126,5 +127,41 @@ public class UserController : Controller
         {
             return BadRequest(response);
         }
+    }
+
+    /* [HttpPost("refrescarToken")]
+    public async Task<IActionResult> RefrescarToken([FromBody] RefreshTokenRequest request)
+    {
+        var result = await _userService.DevolverTokenRefresh(request);
+
+        if (result.Result)
+        {
+            return Ok(new { Token = result.Token, Msg = "RefreshToken generado correctamente!" });
+        }
+        else
+        {
+            return BadRequest(new { Msg = result.Msg });
+        }
+    } */
+
+    [HttpPost("refrescarToken")]
+    public async Task<IActionResult> ObtenerRefreshToken([FromBody] RefreshTokenRequest request)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var tokenExpiradoSupuestamente = tokenHandler.ReadJwtToken(request.TokenExpirado);
+
+        if (tokenExpiradoSupuestamente.ValidTo > DateTime.UtcNow)
+            return BadRequest(new RefreshTokenResponse { Result = false, Msg = "Token no ha expirado" });
+
+        string idUser = tokenExpiradoSupuestamente.Claims.First(x =>
+            x.Type == JwtRegisteredClaimNames.NameId
+        ).Value.ToString();
+
+        var autorizacionResponse = await _userService.DevolverTokenRefresh(request, idUser);
+
+        if (autorizacionResponse.Result)
+            return Ok(autorizacionResponse);
+        else
+            return BadRequest(autorizacionResponse);
     }
 }
