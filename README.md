@@ -26,21 +26,30 @@
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"><br>
 
 <!-- Seccion 2 -->
-<h3>Dependencias utilizadas:</h3>
+<h4>Dependencias utilizadas:</h4>
 - Microsoft.AspNetCore.Authentication.JwtBearer - v7.0.11<br>
 - System.IdentityModel.Tokens.Jwt - v7.0.2<br>
-- Npgsql.EntityFrameworkCore.PostgreSQL - v7.0.11<br>
+- Npgsql.EntityFrameworkCore.PostgreSQL - v7.0.12<br>
 - Falta por mencionar mas...
 
 <!-- Seccion 3 -->
-<h4>Realizar los siguientes puntos de JWT:</h4>
+<h4>Realizar las siguientes consultas Principales:</h4>
+<h3>Grupo A:</h3>
+- Crear un consulta que permita visualizar los veterinarios cuya especialidad sea Cirujano vascular ✔ <br>
+- Listar los medicamentos que pertenezcan a el laboratorio Genfar. ✔ <br>
+- Mostrar las mascotas que se encuentren registradas cuya especie sea felina. ✔ <br>
+- Listar los propietarios y sus mascotas.. ✔ <br>
+- Listar los medicamentos que tenga un precio de venta mayor a 50000. ✔ <br>
+- Listar las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023. ✔ <br>
 
-- Login and Register HTML5, CSS3 & JS. ✔
-- Registro de usuario. ✔
-- Autenticacion de usuario. ✔
-- Generacion de Token. ✔
-- Generacion del Token Refresh. ✔
-- Pruebas de la Anotacion [Authorize]. ✔
+<h3>Grupo B:</h3>
+- Listar todas las mascotas agrupadas por especie. ✔ <br>
+- Listar todos los movimientos de medicamentos y el valor total de cada movimiento. ✔ <br>
+- Listar las mascotas que fueron atendidas por un determinado veterinario. ✔ <br>
+- Listar los proveedores que me venden un determinado medicamento. ✔ <br>
+- Listar las mascotas y sus propietarios cuya raza sea Golden Retriver. ✔ <br>
+- Listar la cantidad de mascotas que pertenecen a una raza a una raza. ✔ <br>
+Nota: Se debe mostrar una lista de las razas y la cantidad de mascotas que pertenecen a la raza. ⚠
 
 <!-- Footer -->
 <h5>Autores:</h5>
