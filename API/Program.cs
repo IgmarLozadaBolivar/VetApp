@@ -8,9 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Persistence;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var logger = new LoggerConfiguration()
+					.ReadFrom.Configuration(builder.Configuration)
+					.Enrich.FromLogContext()
+					.CreateLogger();
+builder.Logging.AddSerilog(logger);
 builder.Services.AddControllers(options =>
 {
     options.RespectBrowserAcceptHeader = true;
@@ -89,6 +94,24 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1.1/swagger.json", "Administracion Veterinaria App V1.1");
         c.RoutePrefix = "swagger";
     });
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+    try
+    {
+        var context = services.GetRequiredService<DbAppContext>();
+        await context.Database.MigrateAsync();
+        await DbAppContextSeed.SeedRolesAsync(context, loggerFactory);
+        await DbAppContextSeed.SeedAsync(context, loggerFactory);
+    }
+    catch (Exception ex)
+    {
+        var _logger = loggerFactory.CreateLogger<Program>();
+        _logger.LogError(ex, "Ocurrio un error durante la migracion");
+    }
 }
 
 app.UseCors("CorsPolicy");
