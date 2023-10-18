@@ -26,6 +26,17 @@
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"><br>
 
 <!-- Seccion 2 -->
+<h3>Requerimientos funcionales:</h3>
+𐤏 Autenticación y autorizacion:
+  ◦ El sistema debe implementar protección en los endpoints utilizando JWT (JSON Web Tokens). El token tiene una duracion de 1 minuto. ✖ <br>
+  ◦ Se debe implementar refresh token. ✖ <br>
+  ◦ Debe restringir las peticiones a los endpoints según los roles de los usuarios. ✖ <br>
+𐤏 Se debe permitir realizar procesos de creacion, edicion, eliminacion y listado de informacion de cada una de las tablas. ✔ <br>
+𐤏 El backend debe permitir restringir peticiones consecutivos usando tecnicas de limitacion por IP. ✔ <br>
+𐤏 El backend debe permitir realizar la paginacion en  las peticiones get de todos los controladores. 🛠 <br>
+𐤏 Los controladores deben implementar 2 versiones diferentes (Query y Header). 🛠 <br>
+
+<!-- Seccion 3 -->
 <h3>Realizar las siguientes consultas Principales:</h3>
 <h4>Grupo A:</h4>
 - Crear un consulta que permita visualizar los veterinarios cuya especialidad sea Cirujano vascular ✔ <br>
@@ -44,7 +55,7 @@
 - Listar la cantidad de mascotas que pertenecen a una raza a una raza. ✔ <br>
 Nota: Se debe mostrar una lista de las razas y la cantidad de mascotas que pertenecen a la raza. ⚠
 
-<!-- Seccion 3 -->
+<!-- Seccion 4 -->
 <h3>Dependencias o paquetes Nuget utilizados:</h3>
 <h4>API</h4>
 - Serilog.AspNetCore - v7.0.0 <br>
