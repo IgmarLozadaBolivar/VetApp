@@ -5,6 +5,7 @@ using API.Models;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using NodaTime;
 using Persistence;
 namespace API.Services;
 
@@ -105,8 +106,8 @@ public class UserService : IUserService
             {
                 IdUserFK = usuarioEncontrado.Id,
                 Token = tokenCreado,
-                Expires = DateTime.UtcNow.AddMinutes(1),
-                Created = DateTime.UtcNow,
+                Expires = LocalDateTime.FromDateTime(DateTime.UtcNow).PlusMinutes(1),
+                Created = LocalDateTime.FromDateTime(DateTime.UtcNow),
             };
 
             _context.RefreshTokens.Add(refreshToken);
@@ -175,12 +176,7 @@ public class UserService : IUserService
         }
     }
 
-    /* private async Task<RefreshTokenResponse> GuardarRefreshToken(
-        string idUser,
-        string token
-    ); */
-
-    public async Task<RefreshTokenResponse> DevolverTokenRefresh(RefreshTokenRequest refreshTokenRequest, string idUser)
+    public async Task<RefreshTokenResponse> DevolverTokenRefresh(RefreshTokenRequest refreshTokenRequest, int idUser)
     {
         var refreshTokenEncontrado = _context.RefreshTokens.FirstOrDefault(x =>
             x.Token == refreshTokenRequest.TokenExpirado &&
@@ -191,7 +187,10 @@ public class UserService : IUserService
 
         var user = await _context.Users.FindAsync(refreshTokenEncontrado.IdUserFK);
         var roles = user.Rols.Select(r => r.Nombre).ToList();
-        var tokenCreado = GenerarToken(idUser, roles);
+        var tokenCreado = GenerarToken(idUser.ToString(), roles);
+
+        refreshTokenEncontrado.Token = tokenCreado;
+        _context.SaveChanges();
 
         var response = new RefreshTokenResponse
         {

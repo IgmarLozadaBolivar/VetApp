@@ -7,5 +7,5 @@ public interface IUserService
     Task<UserResponse> Loguear(UserRequest request);
     Task<TokenResponse> ValidarToken(TokenRequest request);
     Task<RolResponse> AsignarRolAUsuario(RolRequest request);
-    Task<RefreshTokenResponse> DevolverTokenRefresh(RefreshTokenRequest refreshTokenRequest, string idUser);
+    Task<RefreshTokenResponse> DevolverTokenRefresh(RefreshTokenRequest refreshTokenRequest, int idUser);
 }
