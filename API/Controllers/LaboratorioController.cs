@@ -36,7 +36,7 @@ public class LaboratorioController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<LaboratorioDto>> Get(string id)
+    public async Task<ActionResult<LaboratorioDto>> Get(int id)
     {
         var laboratorio = await unitOfWork.Laboratorios.GetByIdAsync(id);
         if (laboratorio == null)
@@ -87,7 +87,7 @@ public class LaboratorioController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<LaboratorioDto>> Put(string id, [FromBody] LaboratorioDto laboratorioDto)
+    public async Task<ActionResult<LaboratorioDto>> Put(int id, [FromBody] LaboratorioDto laboratorioDto)
     {
         if (laboratorioDto == null)
         {
@@ -103,7 +103,7 @@ public class LaboratorioController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
         var laboratorio = await unitOfWork.Laboratorios.GetByIdAsync(id);
         if (laboratorio == null)

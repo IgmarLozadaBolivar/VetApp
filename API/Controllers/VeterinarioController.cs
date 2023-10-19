@@ -36,11 +36,12 @@ public class VeterinarioController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<VeterinarioDto>> Get(string id)
+    public async Task<ActionResult<VeterinarioDto>> Get(int id)
     {
         var veterinario = await unitOfWork.Veterinarios.GetByIdAsync(id);
-        if (veterinario == null){
-           return NotFound();
+        if (veterinario == null)
+        {
+            return NotFound();
         }
         return this.mapper.Map<VeterinarioDto>(veterinario);
     }
@@ -65,7 +66,7 @@ public class VeterinarioController : BaseApiController
     }
 
     [HttpGet("cirujanosVasculares")]
-    [Authorize(Roles = "Administrador, Empleado, Usuario")]
+    [Authorize(Roles = "Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<VeterinarioDto>>> VeterinariosCirujanosVasculares()
@@ -96,7 +97,7 @@ public class VeterinarioController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<VeterinarioDto>> Put(string id, [FromBody] VeterinarioDto veterinarioDto)
+    public async Task<ActionResult<VeterinarioDto>> Put(int id, [FromBody] VeterinarioDto veterinarioDto)
     {
         if (veterinarioDto == null)
         {
@@ -112,7 +113,7 @@ public class VeterinarioController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
         var veterinario = await unitOfWork.Veterinarios.GetByIdAsync(id);
         if (veterinario == null)

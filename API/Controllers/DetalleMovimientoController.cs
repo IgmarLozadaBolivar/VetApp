@@ -36,7 +36,7 @@ public class DetalleMovimientoController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<DetalleMovimientoDto>> Get(string id)
+    public async Task<ActionResult<DetalleMovimientoDto>> Get(int id)
     {
         var detalleMovimiento = await unitOfWork.DetalleMovimientos.GetByIdAsync(id);
         if (detalleMovimiento == null)
@@ -88,7 +88,7 @@ public class DetalleMovimientoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<DetalleMovimientoDto>> Put(string id, [FromBody] DetalleMovimientoDto detalleMovimientoDto)
+    public async Task<ActionResult<DetalleMovimientoDto>> Put(int id, [FromBody] DetalleMovimientoDto detalleMovimientoDto)
     {
         if (detalleMovimientoDto == null)
         {
@@ -104,7 +104,7 @@ public class DetalleMovimientoController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
         var detalleMovimiento = await unitOfWork.DetalleMovimientos.GetByIdAsync(id);
         if (detalleMovimiento == null)

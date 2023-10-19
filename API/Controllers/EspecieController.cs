@@ -36,7 +36,7 @@ public class EspecieController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<EspecieDto>> Get(string id)
+    public async Task<ActionResult<EspecieDto>> Get(int id)
     {
         var especie = await unitOfWork.Especies.GetByIdAsync(id);
         if (especie == null)
@@ -88,7 +88,7 @@ public class EspecieController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<EspecieDto>> Put(string id, [FromBody] EspecieDto especieDto)
+    public async Task<ActionResult<EspecieDto>> Put(int id, [FromBody] EspecieDto especieDto)
     {
         if (especieDto == null)
         {
@@ -104,7 +104,7 @@ public class EspecieController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
         var especie = await unitOfWork.Especies.GetByIdAsync(id);
         if (especie == null)

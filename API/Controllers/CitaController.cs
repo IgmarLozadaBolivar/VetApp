@@ -36,7 +36,7 @@ public class CitaController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<CitaDto>> Get(string id)
+    public async Task<ActionResult<CitaDto>> Get(int id)
     {
         var cita = await unitOfWork.Citas.GetByIdAsync(id);
         if (cita == null)
@@ -88,7 +88,7 @@ public class CitaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<CitaDto>> Put(string id, [FromBody] CitaDto citaDto)
+    public async Task<ActionResult<CitaDto>> Put(int id, [FromBody] CitaDto citaDto)
     {
         if (citaDto == null)
         {
@@ -104,7 +104,7 @@ public class CitaController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
         var cita = await unitOfWork.Citas.GetByIdAsync(id);
         if (cita == null)

@@ -36,7 +36,7 @@ public class MovimientoMedicamentoController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<MovimientoMedicamentoDto>> Get(string id)
+    public async Task<ActionResult<MovimientoMedicamentoDto>> Get(int id)
     {
         var movimientoMedicamento = await unitOfWork.MovimientoMedicamentos.GetByIdAsync(id);
         if (movimientoMedicamento == null)
@@ -57,8 +57,6 @@ public class MovimientoMedicamentoController : BaseApiController
 
         foreach (var movimientoMedicamento in movimientoMedicamentos.registros)
         {
-            await unitOfWork.MovimientoMedicamentos.LoadMedicamentosAsync(movimientoMedicamento);
-            await unitOfWork.MovimientoMedicamentos.LoadPropietariosAsync(movimientoMedicamento);
             await unitOfWork.MovimientoMedicamentos.LoadTipoMovimientosAsync(movimientoMedicamento);
         }
 
@@ -102,7 +100,7 @@ public class MovimientoMedicamentoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
 
-    public async Task<ActionResult<MovimientoMedicamentoDto>> Put(string id, [FromBody] MovimientoMedicamentoDto movimientoMedicamentoDto)
+    public async Task<ActionResult<MovimientoMedicamentoDto>> Put(int id, [FromBody] MovimientoMedicamentoDto movimientoMedicamentoDto)
     {
         if (movimientoMedicamentoDto == null)
         {
@@ -118,7 +116,7 @@ public class MovimientoMedicamentoController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
         var movimientoMedicamento = await unitOfWork.MovimientoMedicamentos.GetByIdAsync(id);
         if (movimientoMedicamento == null)

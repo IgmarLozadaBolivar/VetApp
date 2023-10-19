@@ -36,7 +36,7 @@ public class ProveedorController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<ProveedorDto>> Get(string id)
+    public async Task<ActionResult<ProveedorDto>> Get(int id)
     {
         var proveedor = await unitOfWork.Proveedores.GetByIdAsync(id);
         if (proveedor == null)
@@ -93,7 +93,7 @@ public class ProveedorController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
 
-    public async Task<ActionResult<ProveedorDto>> Put(string id, [FromBody] ProveedorDto proveedorDto)
+    public async Task<ActionResult<ProveedorDto>> Put(int id, [FromBody] ProveedorDto proveedorDto)
     {
         if (proveedorDto == null)
         {
@@ -109,7 +109,7 @@ public class ProveedorController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
         var proveedor = await unitOfWork.Proveedores.GetByIdAsync(id);
         if (proveedor == null)

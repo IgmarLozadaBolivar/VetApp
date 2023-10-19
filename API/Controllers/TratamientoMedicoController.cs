@@ -36,7 +36,7 @@ public class TratamientoMedicoController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<TratamientoMedicoDto>> Get(string id)
+    public async Task<ActionResult<TratamientoMedicoDto>> Get(int id)
     {
         var tratamientoMedico = await unitOfWork.TratamientoMedicos.GetByIdAsync(id);
         if (tratamientoMedico == null)
@@ -88,7 +88,7 @@ public class TratamientoMedicoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<TratamientoMedicoDto>> Put(string id, [FromBody] TratamientoMedicoDto tratamientoMedicoDto)
+    public async Task<ActionResult<TratamientoMedicoDto>> Put(int id, [FromBody] TratamientoMedicoDto tratamientoMedicoDto)
     {
         if (tratamientoMedicoDto == null)
         {
@@ -104,7 +104,7 @@ public class TratamientoMedicoController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
         var tratamientoMedico = await unitOfWork.TratamientoMedicos.GetByIdAsync(id);
         if (tratamientoMedico == null)

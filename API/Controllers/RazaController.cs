@@ -36,7 +36,7 @@ public class RazaController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado, Usuario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<RazaDto>> Get(string id)
+    public async Task<ActionResult<RazaDto>> Get(int id)
     {
         var raza = await unitOfWork.Razas.GetByIdAsync(id);
         if (raza == null)
@@ -88,7 +88,7 @@ public class RazaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<RazaDto>> Put(string id, [FromBody] RazaDto razaDto)
+    public async Task<ActionResult<RazaDto>> Put(int id, [FromBody] RazaDto razaDto)
     {
         if (razaDto == null)
         {
@@ -104,7 +104,7 @@ public class RazaController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
         var raza = await unitOfWork.Razas.GetByIdAsync(id);
         if (raza == null)

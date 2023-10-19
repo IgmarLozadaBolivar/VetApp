@@ -37,7 +37,7 @@ public class UserController : Controller
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<UserDto>> Get(string id)
+    public async Task<ActionResult<UserDto>> Get(int id)
     {
         var user = await unitOfWork.Users.GetByIdAsync(id);
         if (user == null)
@@ -129,21 +129,6 @@ public class UserController : Controller
         }
     }
 
-    /* [HttpPost("refrescarToken")]
-    public async Task<IActionResult> RefrescarToken([FromBody] RefreshTokenRequest request)
-    {
-        var result = await _userService.DevolverTokenRefresh(request);
-
-        if (result.Result)
-        {
-            return Ok(new { Token = result.Token, Msg = "RefreshToken generado correctamente!" });
-        }
-        else
-        {
-            return BadRequest(new { Msg = result.Msg });
-        }
-    } */
-
     [HttpPost("refrescarToken")]
     public async Task<IActionResult> ObtenerRefreshToken([FromBody] RefreshTokenRequest request)
     {
@@ -157,7 +142,7 @@ public class UserController : Controller
             x.Type == JwtRegisteredClaimNames.NameId
         ).Value.ToString();
 
-        var autorizacionResponse = await _userService.DevolverTokenRefresh(request, idUser);
+        var autorizacionResponse = await _userService.DevolverTokenRefresh(request, int.Parse(idUser));
 
         if (autorizacionResponse.Result)
             return Ok(autorizacionResponse);
