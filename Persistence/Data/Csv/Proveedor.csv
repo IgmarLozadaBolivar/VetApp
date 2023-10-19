@@ -1,5 +1,5 @@
-Id,Nombre,Direccion,Telefono,IdUserFK
-b64fwxj,Sabina Gómez,"Mercado Alejandra s/n. - Idaho Falls, Can / 10814",6320110628,
-nkmrt9u,Sergi Montoya,"Quinta Catalina Valladares 17 - Largo, Ast / 27115",1480580456,
-4hfgbc5,Desiree Valencia,"Sección Miguel 7 - Pasadena, And / 48317",1005076459,
-3r491kn,Jose David Torregrosa,"Puente Jacobo 28 - Chattanooga, Man / 33021",7731440705,
+Id,Nombre,Direccion,Telefono
+1,Sabina Gómez,"Mercado Alejandra s/n. - Idaho Falls, Can / 10814",302 0110628
+2,Sergi Montoya,"Quinta Catalina Valladares 17 - Largo, Ast / 27115",312 0580456
+3,Desiree Valencia,"Sección Miguel 7 - Pasadena, And / 48317",327 5076459
+4,Jose David Torregrosa,"Puente Jacobo 28 - Chattanooga, Man / 33021",318 1440705

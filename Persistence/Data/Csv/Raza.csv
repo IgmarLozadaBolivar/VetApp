@@ -1,7 +1,7 @@
 Id,IdEspecieFK,Nombre
-gcx5f5v,im2f6yn,Husky Siberiano
-tipa052,b5p8zim,Goldfish
-cahft9j,wyy6a64,Holandés
-p38eqtf,dwvp6kp,Siamés
-hffinc1,i82e653,Gloster
-fuyhxxr,dwvp6kp,Persa
+1,2,Husky Siberiano
+2,4,Goldfish
+3,5,Holandés
+4,1,Siamés
+5,3,Gloster
+6,1,Persa

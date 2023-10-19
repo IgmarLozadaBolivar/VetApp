@@ -1,7 +1,7 @@
-Id,IdPropietarioFK,IdEspecieFK,IdRazaFK,Nombre,FechaNac
-v14g4qc,93ahkyj,im2f6yn,gcx5f5v,Zeus,1/11/2001
-f9txrk5,pk7nv9x,b5p8zim,tipa052,Paigi,15/3/2010
-bhivydy,w0z16q5,wyy6a64,cahft9j,Lana,20/5/2003
-ydexf94,qbptckn,dwvp6kp,p38eqtf,Cyrio,9/11/1993
-68vtig3,0jm9rmj,i82e653,hffinc1,Naash,4/4/2007
-k67ki4j,yzv5uq0,dwvp6kp,fuyhxxr,Kabby,18/9/1994
+Id,IdPropietarioFK,IdRazaFK,Nombre,FechaNac
+1,1,1,Zeus,1/11/2001
+2,2,2,Paigi,15/3/2010
+3,3,3,Lana,20/5/2003
+4,4,4,Cyrio,9/11/1993
+5,5,5,Naash,4/4/2007
+6,6,6,Kabby,18/9/1994

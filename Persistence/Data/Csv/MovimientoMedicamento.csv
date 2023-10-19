@@ -1,3 +1,3 @@
-Id,Fecha,IdMedicamentoFK,IdPropietarioFK,Total,IdTipoMovimientoFK
-q16h29z,2024-11-01 00:00:00-05,arg48ft,pk7nv9x,1,hnnw7ja
-m2zp7rz,2026-05-04 00:00:00-05,47crpt2,0jm9rmj,1,hnnw7ja
+Id,Fecha,Total,IdTipoMovimientoFK
+1,2024-11-01 00:00:00-05,5,1
+2,2026-05-04 00:00:00-05,3,1
