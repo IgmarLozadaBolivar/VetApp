@@ -255,6 +255,7 @@ public class DbAppContextSeed
                             {
                                 Id = item.Id,
                                 Fecha = item.Fecha,
+                                Total = item.Total,
                                 IdTipoMovimientoFK = item.IdTipoMovimientoFK,
                             });
                         }
@@ -311,7 +312,7 @@ public class DbAppContextSeed
                                 IdCitaFK = item.IdCitaFK,
                                 IdMedicamentoFK = item.IdMedicamentoFK,
                                 Dosis = item.Dosis,
-                                DetalleConsumo = item.DetalleConsumo,
+                                FechaAdministracion = item.FechaAdministracion,
                                 Observacion = item.Observacion,
                             });
                         }
@@ -362,8 +363,9 @@ public class DbAppContextSeed
             {
                 var roles = new List<Rol>()
                         {
-                            new Rol{Id="i0ut69u", Nombre="Administrador"},
-                            new Rol{Id="y4b0gih", Nombre="Empleado"},
+                            new Rol{Id=1, Nombre="Administrador"},
+                            new Rol{Id=2, Nombre="Empleado"},
+                            new Rol{Id=3, Nombre="Usuario"},
                         };
                 context.Rols.AddRange(roles);
                 await context.SaveChangesAsync();
