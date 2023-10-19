@@ -7,5 +7,5 @@ public interface IVeterinario : IGenericRepo<Veterinario>
     Task<IEnumerable<Veterinario>> VeterinariosCirujanosVasculares();
 
     // * Paginacion
-    Task LoadCitasAsync(string veterinarioId);
+    Task LoadCitasAsync(int veterinarioId);
 }

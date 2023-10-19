@@ -4,5 +4,5 @@ namespace Domain.Interfaces;
 public interface IRaza : IGenericRepo<Raza>
 {
     Task LoadEspeciesAsync(Raza raza);
-    Task LoadMascotasAsync(string razaId);
+    Task LoadMascotasAsync(int razaId);
 }

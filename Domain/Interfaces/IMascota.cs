@@ -12,6 +12,5 @@ public interface IMascota : IGenericRepo<Mascota>
 
     // * Metodos para Paginacion
     Task LoadPropietariosAsync(Mascota mascota);
-    Task LoadEspeciesAsync(Mascota mascota);
     Task LoadRazasAsync(Mascota mascota);
 }

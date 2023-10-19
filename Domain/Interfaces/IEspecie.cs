@@ -3,6 +3,6 @@ namespace Domain.Interfaces;
 
 public interface IEspecie : IGenericRepo<Especie>
 {
-    Task LoadRazasAsync(string razaId);
-    Task LoadMascotasAsync(string mascotaId);
+    Task LoadRazasAsync(int razaId);
+    Task LoadMascotasAsync(int mascotaId);
 }

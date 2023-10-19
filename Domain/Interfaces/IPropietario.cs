@@ -8,7 +8,6 @@ public interface IPropietario : IGenericRepo<Propietario>
     Task<object> MascotasGoldenRetriever();
 
     // * Paginacion
-    //Task LoadUsersAsync(Propietario propietario); (Esto no es relevante)
-    Task LoadMascotasAsync(string veterinarioId);
-    Task LoadMovimientoMedicamentosAsync(string veterinarioId);
+    Task LoadMascotasAsync(int veterinarioId);
+    Task LoadMovimientoMedicamentosAsync(int veterinarioId);
 }

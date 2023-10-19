@@ -7,7 +7,5 @@ public interface IMovimientoMedicamento : IGenericRepo<MovimientoMedicamento>
     Task<object> TotalCadaMovimiento();
 
     // * Metodos para Paginacion
-    Task LoadMedicamentosAsync(MovimientoMedicamento movimientoMedicamento);
-    Task LoadPropietariosAsync(MovimientoMedicamento movimientoMedicamento);
     Task LoadTipoMovimientosAsync(MovimientoMedicamento movimientoMedicamento);
 }
