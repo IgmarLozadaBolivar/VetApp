@@ -13,7 +13,7 @@ public class VeterinarioConfiguration : IEntityTypeConfiguration<Veterinario>
 
         builder.Property(f => f.Id)
         .IsRequired()
-        .HasDefaultValueSql("substring(gen_random_uuid()::text, 1, 7)");
+        .HasMaxLength(3);
 
         builder.Property(f => f.Nombre)
         .IsRequired()
@@ -42,9 +42,5 @@ public class VeterinarioConfiguration : IEntityTypeConfiguration<Veterinario>
         .HasComment("Especialidad del veterinario")
         .HasColumnType("varchar")
         .HasMaxLength(50);
-
-        builder.HasOne(p => p.User)
-        .WithMany(p => p.Veterinarios)
-        .HasForeignKey(p => p.IdUserFK);
     }
 }

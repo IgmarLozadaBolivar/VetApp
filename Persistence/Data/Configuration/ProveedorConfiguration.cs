@@ -13,7 +13,7 @@ public class ProveedorConfiguration : IEntityTypeConfiguration<Proveedor>
 
         builder.Property(f => f.Id)
         .IsRequired()
-        .HasDefaultValueSql("substring(gen_random_uuid()::text, 1, 7)");
+        .HasMaxLength(3);
 
         builder.Property(f => f.Nombre)
         .IsRequired()
@@ -56,9 +56,5 @@ public class ProveedorConfiguration : IEntityTypeConfiguration<Proveedor>
                        j.HasKey(t => new { t.IdProveedorFK, t.IdMedicamentoFK });
 
                    });
-
-        builder.HasOne(p => p.User)
-        .WithMany(p => p.Proveedores)
-        .HasForeignKey(p => p.IdUserFK);
     }
 }

@@ -13,7 +13,7 @@ public class MascotaConfiguration : IEntityTypeConfiguration<Mascota>
 
         builder.Property(f => f.Id)
         .IsRequired()
-        .HasDefaultValueSql("substring(gen_random_uuid()::text, 1, 7)");
+        .HasMaxLength(3);
 
         builder.Property(f => f.Nombre)
         .IsRequired()
@@ -30,10 +30,6 @@ public class MascotaConfiguration : IEntityTypeConfiguration<Mascota>
         builder.HasOne(p => p.Propietarios)
         .WithMany(p => p.Mascotas)
         .HasForeignKey(p => p.IdPropietarioFK);
-
-        builder.HasOne(p => p.Especies)
-        .WithMany(p => p.Mascotas)
-        .HasForeignKey(p => p.IdEspecieFK);
 
         builder.HasOne(p => p.Razas)
         .WithMany(p => p.Mascotas)

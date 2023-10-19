@@ -13,7 +13,7 @@ public class MovimientoMedicamentoConfiguration : IEntityTypeConfiguration<Movim
 
         builder.Property(f => f.Id)
         .IsRequired()
-        .HasDefaultValueSql("substring(gen_random_uuid()::text, 1, 7)");
+        .HasMaxLength(3);
 
         builder.Property(f => f.Fecha)
         .IsRequired()
@@ -25,14 +25,6 @@ public class MovimientoMedicamentoConfiguration : IEntityTypeConfiguration<Movim
         .HasColumnName("Total")
         .HasComment("Total del movimiento")
         .HasColumnType("int");
-
-        builder.HasOne(p => p.Medicamentos)
-        .WithMany(p => p.MovimientoMedicamentos)
-        .HasForeignKey(p => p.IdMedicamentoFK);
-
-        builder.HasOne(p => p.Propietarios)
-        .WithMany(p => p.MovimientoMedicamentos)
-        .HasForeignKey(p => p.IdPropietarioFK);
 
         builder.HasOne(p => p.TipoMovimientos)
         .WithMany(p => p.MovimientoMedicamentos)

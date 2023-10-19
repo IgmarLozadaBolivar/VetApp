@@ -13,7 +13,7 @@ public class TratamientoMedicoConfiguration : IEntityTypeConfiguration<Tratamien
 
         builder.Property(f => f.Id)
         .IsRequired()
-        .HasDefaultValueSql("substring(gen_random_uuid()::text, 1, 7)");
+        .HasMaxLength(3);
 
         builder.Property(f => f.Dosis)
         .IsRequired()
@@ -22,12 +22,11 @@ public class TratamientoMedicoConfiguration : IEntityTypeConfiguration<Tratamien
         .HasColumnType("varchar")
         .HasMaxLength(50);
 
-        builder.Property(f => f.DetalleConsumo)
+        builder.Property(f => f.FechaAdministracion)
         .IsRequired()
-        .HasColumnName("DetalleConsumo")
-        .HasComment("Detalles del consumo de la dosis")
-        .HasColumnType("varchar")
-        .HasMaxLength(150);
+        .HasColumnName("FechaAdministracion")
+        .HasComment("Fecha de administracion")
+        .HasColumnType("timestamp");
 
         builder.Property(f => f.Observacion)
         .IsRequired()

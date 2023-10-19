@@ -13,7 +13,7 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
 
         builder.Property(f => f.Id)
         .IsRequired()
-        .HasDefaultValueSql("substring(gen_random_uuid()::text, 1, 7)");
+        .HasMaxLength(3);
 
         builder.Property(f => f.Token)
         .IsRequired()
@@ -25,11 +25,13 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
         builder.Property(f => f.Expires)
         .IsRequired()
         .HasColumnName("Expires")
-        .HasComment("Expiracion del token");
+        .HasComment("Expiracion del token")
+        .HasColumnType("timestamp");
 
         builder.Property(f => f.Created)
         .IsRequired()
         .HasColumnName("Created")
-        .HasComment("Creacion del token");
+        .HasComment("Creacion del token")
+        .HasColumnType("timestamp");
     }
 }

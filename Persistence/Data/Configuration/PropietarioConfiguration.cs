@@ -13,7 +13,7 @@ public class PropietarioConfiguration : IEntityTypeConfiguration<Propietario>
 
         builder.Property(f => f.Id)
         .IsRequired()
-        .HasDefaultValueSql("substring(gen_random_uuid()::text, 1, 7)");
+        .HasMaxLength(3);
 
         builder.Property(f => f.Nombre)
         .IsRequired()
@@ -35,9 +35,5 @@ public class PropietarioConfiguration : IEntityTypeConfiguration<Propietario>
         .HasComment("Telefono del propietario")
         .HasColumnType("varchar")
         .HasMaxLength(30);
-
-        builder.HasOne(p => p.Users)
-        .WithMany(p => p.Propietarios)
-        .HasForeignKey(p => p.IdUserFK);
     }
 }
