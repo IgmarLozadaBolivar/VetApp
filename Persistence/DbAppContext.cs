@@ -1,6 +1,8 @@
 using System.Reflection;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
+using Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime;
 namespace Persistence;
 
 public class DbAppContext : DbContext
@@ -31,5 +33,13 @@ public class DbAppContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseNpgsql("Host=localhost;Database=VetDb;Username=postgres;Password=1122809631", npgsqlOptions =>
+        {
+            npgsqlOptions.UseNodaTime();
+        });
     }
 }
