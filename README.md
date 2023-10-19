@@ -64,16 +64,19 @@ Nota: Se debe mostrar una lista de las razas y la cantidad de mascotas que perte
 - Microsoft.EntityFrameworkCore.Design - v7.0.12 <br>
 - Microsoft.AspNetCore.Authentication.JwtBearer - v7.0.12 <br>
 - AutoMapper.Extensions.Microsoft.DependencyInjection - v12.0.1 <br>
+- Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime - v7.0.11 <br>
 
 <h4>Domain</h4>
 - itext7.pdfhtml - v5.0.1 <br>
 - FluentValidation.AspNetCore - v11.3.0 <br>
 - Microsoft.EntityFrameworkCore - v7.0.12 <br>
+- Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime - v7.0.11 <br>
 
 <h4>Persistence</h4>
 - CsvHelper - v30.0.1 <br>
 - Microsoft.EntityFrameworkCore - v7.0.12 <br>
 - Npgsql.EntityFrameworkCore.PostgreSQL - v7.0.11 <br>
+- Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime - v7.0.11 <br>
 
 <!-- Footer -->
 <h5>Autores:</h5>
