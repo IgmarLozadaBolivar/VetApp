@@ -3,8 +3,8 @@ namespace API.Dtos;
 
 public class DetalleMovimientoDto : BaseEntity
 {
-    public string IdMedicamentoFK { get; set; }
+    public int IdMedicamentoFK { get; set; }
     public int Cantidad { get; set; }
-    public string IdMovMedFK { get; set; }
+    public int IdMovMedFK { get; set; }
     public decimal Precio { get; set; }
 }

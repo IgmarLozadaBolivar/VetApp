@@ -2,7 +2,7 @@ namespace API.Dtos;
 
 public class MovimientoMedicamentoxManyDto
 {
-    public string Id { get; set; }
+    public int Id { get; set; }
     public DateTime Fecha { get; set; }
     public MedicamentoDto medicamentos { get; set; }
     public PropietarioDto propietarios { get; set; }

@@ -2,7 +2,7 @@ namespace API.Dtos;
 
 public class TratamientoMedicoxManyDto
 {
-    public string Id { get; set; }
+    public int Id { get; set; }
     public CitaDto citas { get; set; }
     public MedicamentoDto medicamentos { get; set; }
     public string Dosis { get; set; }

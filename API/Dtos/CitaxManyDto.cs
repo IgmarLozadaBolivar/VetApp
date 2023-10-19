@@ -2,7 +2,7 @@ namespace API.Dtos;
 
 public class CitaxManyDto
 {
-    public string Id { get; set; }
+    public int Id { get; set; }
     public MascotaDto mascotas { get; set; }
     public DateOnly Fecha { get; set; }
     public TimeSpan Hora { get; set; }

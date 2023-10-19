@@ -2,7 +2,7 @@ namespace API.Dtos;
 
 public class MascotaxManyDto
 {
-    public string Id { get; set; }
+    public int Id { get; set; }
     public PropietarioDto propietarios { get; set; }
     public EspecieDto especies { get; set; }
     public RazaDto razas { get; set; }

@@ -4,8 +4,8 @@ namespace API.Dtos;
 public class MovimientoMedicamentoDto : BaseEntity
 {
     public DateTime Fecha { get; set; }
-    public string IdMedicamentoFK { get; set; }
-    public string IdPropietarioFK { get; set; }
+    public int IdMedicamentoFK { get; set; }
+    public int IdPropietarioFK { get; set; }
     public int Total { get; set; }
-    public string IdTipoMovimientoFK { get; set; }
+    public int IdTipoMovimientoFK { get; set; }
 }

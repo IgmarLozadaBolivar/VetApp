@@ -7,7 +7,7 @@ namespace API.Dtos
 {
     public class TipoMovimientoxManyDto
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Descripcion { get; set; }
         public List<MovimientoMedicamentoDto> movimientoMedicamentos { get; set; }
     }
