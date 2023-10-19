@@ -37,7 +37,6 @@ async function autorizarUsuario() {
             Swal.fire({
                 title: '¡Autenticacion exitosa!',
                 html: `Copia el token: <br><code>${result.token}</code>`,
-                text: 'Tu autenticacion ha sido valida!',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
             }).then((result) => {
