@@ -36,7 +36,7 @@ public class MascotaController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<MascotaDto>> Get(string id)
+    public async Task<ActionResult<MascotaDto>> Get(int id)
     {
         var mascota = await unitOfWork.Mascotas.GetByIdAsync(id);
         if (mascota == null)
@@ -58,7 +58,6 @@ public class MascotaController : BaseApiController
         foreach (var mascota in mascotas.registros)
         {
             await unitOfWork.Mascotas.LoadPropietariosAsync(mascota);
-            await unitOfWork.Mascotas.LoadEspeciesAsync(mascota);
             await unitOfWork.Mascotas.LoadRazasAsync(mascota);
         }
 
@@ -144,7 +143,7 @@ public class MascotaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
 
-    public async Task<ActionResult<MascotaDto>> Put(string id, [FromBody] MascotaDto mascotaDto)
+    public async Task<ActionResult<MascotaDto>> Put(int id, [FromBody] MascotaDto mascotaDto)
     {
         if (mascotaDto == null)
         {
@@ -160,7 +159,7 @@ public class MascotaController : BaseApiController
     [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
         var mascota = await unitOfWork.Mascotas.GetByIdAsync(id);
         if (mascota == null)
