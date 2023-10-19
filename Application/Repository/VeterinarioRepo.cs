@@ -20,7 +20,7 @@ public class VeterinarioRepo : GenericRepo<Veterinario>, IVeterinario
             .ToListAsync();
     }
 
-    public override async Task<Veterinario> GetByIdAsync(string id)
+    public override async Task<Veterinario> GetByIdAsync(int id)
     {
         return await _context.Veterinarios
         .Include(p => p.Citas)
@@ -34,7 +34,7 @@ public class VeterinarioRepo : GenericRepo<Veterinario>, IVeterinario
             .ToListAsync();
     }
 
-    public async Task LoadCitasAsync(string veterinarioId)
+    public async Task LoadCitasAsync(int veterinarioId)
     {
         var cita = await _context.Veterinarios
                 .Include(g => g.Citas)

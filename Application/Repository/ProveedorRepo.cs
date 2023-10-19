@@ -16,14 +16,12 @@ public class ProveedorRepo : GenericRepo<Proveedor>, IProveedor
     public override async Task<IEnumerable<Proveedor>> GetAllAsync()
     {
         return await _context.Proveedores
-            .Include(p => p.User)
             .ToListAsync();
     }
 
-    public override async Task<Proveedor> GetByIdAsync(string id)
+    public override async Task<Proveedor> GetByIdAsync(int id)
     {
         return await _context.Proveedores
-        .Include(p => p.User)
         .FirstOrDefaultAsync(p => p.Id == id);
     }
 
@@ -58,7 +56,6 @@ public class ProveedorRepo : GenericRepo<Proveedor>, IProveedor
         }
         var totalRegistros = await query.CountAsync();
         var registros = await query
-                                .Include(u => u.User)
                                 .Skip((pageIndex - 1) * pageSize)
                                 .Take(pageSize)
                                 .ToListAsync();

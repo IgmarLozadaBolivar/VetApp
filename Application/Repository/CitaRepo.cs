@@ -21,7 +21,7 @@ public class CitaRepo : GenericRepo<Cita>, ICita
             .ToListAsync();
     }
 
-    public override async Task<Cita> GetByIdAsync(string id)
+    public override async Task<Cita> GetByIdAsync(int id)
     {
         return await _context.Citas
         .Include(p => p.Mascotas)

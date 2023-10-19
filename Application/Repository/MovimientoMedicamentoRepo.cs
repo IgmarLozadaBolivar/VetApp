@@ -16,17 +16,13 @@ public class MovimientoMedicamentoRepo : GenericRepo<MovimientoMedicamento>, IMo
     public override async Task<IEnumerable<MovimientoMedicamento>> GetAllAsync()
     {
         return await _context.MovimientoMedicamentos
-            .Include(p => p.Medicamentos)
-            .Include(p => p.Propietarios)
             .Include(p => p.TipoMovimientos)
             .ToListAsync();
     }
 
-    public override async Task<MovimientoMedicamento> GetByIdAsync(string id)
+    public override async Task<MovimientoMedicamento> GetByIdAsync(int id)
     {
         return await _context.MovimientoMedicamentos
-        .Include(p => p.Medicamentos)
-        .Include(p => p.Propietarios)
         .Include(p => p.TipoMovimientos)
         .FirstOrDefaultAsync(p => p.Id == id);
     }
@@ -47,20 +43,6 @@ public class MovimientoMedicamentoRepo : GenericRepo<MovimientoMedicamento>, IMo
             .ToListAsync();
 
         return totalMovimiento;
-    }
-
-    public async Task LoadMedicamentosAsync(MovimientoMedicamento movimientoMedicamento)
-    {
-        await _context.Entry(movimientoMedicamento)
-            .Reference(p => p.Medicamentos)
-            .LoadAsync();
-    }
-
-    public async Task LoadPropietariosAsync(MovimientoMedicamento movimientoMedicamento)
-    {
-        await _context.Entry(movimientoMedicamento)
-            .Reference(p => p.Propietarios)
-            .LoadAsync();
     }
 
     public async Task LoadTipoMovimientosAsync(MovimientoMedicamento movimientoMedicamento)

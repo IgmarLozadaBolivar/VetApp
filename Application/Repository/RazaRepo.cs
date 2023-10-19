@@ -21,7 +21,7 @@ public class RazaRepo : GenericRepo<Raza>, IRaza
             .ToListAsync();
     }
 
-    public override async Task<Raza> GetByIdAsync(string id)
+    public override async Task<Raza> GetByIdAsync(int id)
     {
         return await _context.Razas
         .Include(p => p.Mascotas)
@@ -36,7 +36,7 @@ public class RazaRepo : GenericRepo<Raza>, IRaza
             .LoadAsync();
     }
 
-    public async Task LoadMascotasAsync(string razaId)
+    public async Task LoadMascotasAsync(int razaId)
     {
         var mascotas = await _context.Razas
                 .Include(g => g.Mascotas)

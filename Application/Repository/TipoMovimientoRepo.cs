@@ -20,7 +20,7 @@ public class TipoMovimientoRepo : GenericRepo<TipoMovimiento>, ITipoMovimiento
             .ToListAsync();
     }
 
-    public override async Task<TipoMovimiento> GetByIdAsync(string id)
+    public override async Task<TipoMovimiento> GetByIdAsync(int id)
     {
         return await _context.TipoMovimientos
         .Include(p => p.MovimientoMedicamentos)

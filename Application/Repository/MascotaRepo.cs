@@ -1,6 +1,7 @@
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using NodaTime;
 using Persistence;
 namespace Application.Repository;
 
@@ -16,40 +17,51 @@ public class MascotaRepo : GenericRepo<Mascota>, IMascota
     public override async Task<IEnumerable<Mascota>> GetAllAsync()
     {
         return await _context.Mascotas
-            .Include(p => p.Especies)
             .Include(u => u.Razas)
             .ToListAsync();
     }
 
-    public override async Task<Mascota> GetByIdAsync(string id)
+    public override async Task<Mascota> GetByIdAsync(int id)
     {
         return await _context.Mascotas
-        .Include(p => p.Especies)
         .Include(u => u.Razas)
         .FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public async Task<IEnumerable<Mascota>> MascotasEspeciesFelinas()
+    public virtual async Task<object> Consulta3A()
     {
-        return await _context.Mascotas
-            .Include(p => p.Especies)
-            .Where(p => p.Especies.Nombre == "Felina")
+
+        var Mascotas = await (
+            from m in _context.Mascotas
+            join r in _context.Razas on m.IdRazaFK equals r.Id
+            join p in _context.Propietarios on m.IdPropietarioFK equals p.Id
+            join e in _context.Especies on r.IdEspecieFK equals e.Id
+            where e.Nombre.Contains("Felina")
+            select new
+            {
+                Nombre = m.Nombre,
+                Propietario = p.Nombre,
+                FechaNacimiento = m.FechaNac
+            }).Distinct()
             .ToListAsync();
+
+        return Mascotas;
     }
 
     public async Task<IEnumerable<Mascota>> MascotasVacunacionPrimerTrimestre2023()
     {
-        DateOnly inicioTrimestre = new DateOnly(2023, 1, 1);
-        DateOnly finTrimestre = new DateOnly(2023, 3, 31);
+        LocalDate inicioTrimestre = new LocalDate(2023, 1, 1);
+        LocalDate finTrimestre = new LocalDate(2023, 3, 31);
 
         var mascotasVacunacion = await _context.Citas
-        .Where(c => c.Fecha >= inicioTrimestre && c.Fecha <= finTrimestre && c.Motivo == "Vacunacion")
-        .Select(c => c.Mascotas)
-        .Distinct()
-        .ToListAsync();
+            .Where(c => c.Fecha >= inicioTrimestre && c.Fecha <= finTrimestre && c.Motivo == "Vacunacion")
+            .Select(c => c.Mascotas)
+            .Distinct()
+            .ToListAsync();
 
         return mascotasVacunacion;
     }
+
 
     public async Task<object> EspeciesMascotas()
     {
@@ -114,13 +126,6 @@ public class MascotaRepo : GenericRepo<Mascota>, IMascota
     {
         await _context.Entry(mascota)
             .Reference(p => p.Propietarios)
-            .LoadAsync();
-    }
-
-    public async Task LoadEspeciesAsync(Mascota mascota)
-    {
-        await _context.Entry(mascota)
-            .Reference(p => p.Especies)
             .LoadAsync();
     }
 

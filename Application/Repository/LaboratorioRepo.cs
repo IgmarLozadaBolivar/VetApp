@@ -21,14 +21,14 @@ public class LaboratorioRepo : GenericRepo<Laboratorio>, ILaboratorio
             .ToListAsync();
     }
 
-    public override async Task<Laboratorio> GetByIdAsync(string id)
+    public override async Task<Laboratorio> GetByIdAsync(int id)
     {
         return await _context.Laboratorios
         .Include(p => p.Medicamentos)
         .FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public async Task LoadMedicamentosAsync(string medicamentoId)
+    public async Task LoadMedicamentosAsync(int medicamentoId)
     {
         var medicamento = await _context.Laboratorios
                 .Include(g => g.Medicamentos)

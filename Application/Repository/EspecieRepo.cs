@@ -17,29 +17,26 @@ public class EspecieRepo : GenericRepo<Especie>, IEspecie
     {
         return await _context.Especies
             .Include(p => p.Razas)
-            .Include(p => p.Mascotas)
             .ToListAsync();
     }
 
-    public override async Task<Especie> GetByIdAsync(string id)
+    public override async Task<Especie> GetByIdAsync(int id)
     {
         return await _context.Especies
         .Include(p => p.Razas)
-        .Include(p => p.Mascotas)
         .FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public async Task LoadMascotasAsync(string mascotaId)
+    public async Task LoadMascotasAsync(int mascotaId)
     {
         var especie = await _context.Especies
-                .Include(g => g.Mascotas)
                 .FirstOrDefaultAsync(g => g.Id == mascotaId);
 
             if (especie != null)
             {}
     }
 
-    public async Task LoadRazasAsync(string razaId)
+    public async Task LoadRazasAsync(int razaId)
     {
         var genero = await _context.Especies
                 .Include(g => g.Razas)

@@ -20,7 +20,7 @@ public class PropietarioRepo : GenericRepo<Propietario>, IPropietario
             .ToListAsync();
     }
 
-    public override async Task<Propietario> GetByIdAsync(string id)
+    public override async Task<Propietario> GetByIdAsync(int id)
     {
         return await _context.Propietarios
         .Include(p => p.Mascotas)
@@ -72,14 +72,7 @@ public class PropietarioRepo : GenericRepo<Propietario>, IPropietario
         return mascotasGoldenRetriever;
     }
 
-    /* public async Task LoadUsersAsync(Propietario propietario)
-    {
-        await _context.Entry(propietario)
-            .Reference(p => p.Users)
-            .LoadAsync();
-    } */
-
-    public async Task LoadMascotasAsync(string propietarioId)
+    public async Task LoadMascotasAsync(int propietarioId)
     {
         var mascotas = await _context.Propietarios
                 .Include(g => g.Mascotas)
@@ -89,10 +82,9 @@ public class PropietarioRepo : GenericRepo<Propietario>, IPropietario
         { }
     }
 
-    public async Task LoadMovimientoMedicamentosAsync(string propietarioId)
+    public async Task LoadMovimientoMedicamentosAsync(int propietarioId)
     {
         var movimientoMedicamentos = await _context.Propietarios
-                .Include(g => g.MovimientoMedicamentos)
                 .FirstOrDefaultAsync(g => g.Id == propietarioId);
 
         if (movimientoMedicamentos != null)

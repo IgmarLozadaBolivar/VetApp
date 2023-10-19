@@ -16,19 +16,13 @@ public class UserRepo : GenericRepo<User>, IUser
     public override async Task<IEnumerable<User>> GetAllAsync()
     {
         return await _context.Users
-            .Include(p => p.Propietarios)
-            .Include(p => p.Proveedores)
-            .Include(p => p.Veterinarios)
             .Include(p => p.Rols)
             .ToListAsync();
     }
 
-    public override async Task<User> GetByIdAsync(string id)
+    public override async Task<User> GetByIdAsync(int id)
     {
         return await _context.Users
-        .Include(p => p.Propietarios)
-        .Include(p => p.Proveedores)
-        .Include(p => p.Veterinarios)
         .Include(p => p.Rols)
         .FirstOrDefaultAsync(p => p.Id == id);
     }

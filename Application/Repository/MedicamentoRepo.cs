@@ -20,7 +20,7 @@ public class MedicamentoRepo : GenericRepo<Medicamento>, IMedicamento
             .ToListAsync();
     }
 
-    public override async Task<Medicamento> GetByIdAsync(string id)
+    public override async Task<Medicamento> GetByIdAsync(int id)
     {
         return await _context.Medicamentos
         .Include(p => p.Laboratorios)

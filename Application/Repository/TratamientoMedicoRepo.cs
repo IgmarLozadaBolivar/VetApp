@@ -21,7 +21,7 @@ public class TratamientoMedicoRepo : GenericRepo<TratamientoMedico>, ITratamient
             .ToListAsync();
     }
 
-    public override async Task<TratamientoMedico> GetByIdAsync(string id)
+    public override async Task<TratamientoMedico> GetByIdAsync(int id)
     {
         return await _context.TratamientoMedicos
         .Include(p => p.Citas)
