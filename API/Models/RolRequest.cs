@@ -2,6 +2,6 @@ namespace API.Models;
 
 public class RolRequest
 {
-    public string IdUser { get; set; }
-    public string IdRol { get; set; }
+    public int IdUser { get; set; }
+    public int IdRol { get; set; }
 }
