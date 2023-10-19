@@ -28,7 +28,7 @@ public class MascotaRepo : GenericRepo<Mascota>, IMascota
         .FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public virtual async Task<object> Consulta3A()
+    public virtual async Task<object> MascotasEspeciesFelinas()
     {
 
         var Mascotas = await (
