@@ -1,5 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using NodaTime;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -15,7 +16,8 @@ namespace Persistence.Data.Migrations
                 name: "Especie",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nombre = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Nombre de la especie")
                 },
                 constraints: table =>
@@ -27,7 +29,8 @@ namespace Persistence.Data.Migrations
                 name: "Laboratorio",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nombre = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Nombre del laboratorio"),
                     Direccion = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Direccion del laboratorio"),
                     Telefono = table.Column<string>(type: "varchar", maxLength: 30, nullable: false, comment: "Numero del telefono celular del laboratorio")
@@ -38,10 +41,41 @@ namespace Persistence.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Propietario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nombre = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Nombre del propietario"),
+                    Email = table.Column<string>(type: "varchar", maxLength: 150, nullable: false, comment: "Correo electronico del propietario"),
+                    Telefono = table.Column<string>(type: "varchar", maxLength: 30, nullable: false, comment: "Telefono del propietario")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Propietario", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Proveedor",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nombre = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Nombre del proveedor"),
+                    Direccion = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Direccion del proveedor"),
+                    Telefono = table.Column<string>(type: "varchar", maxLength: 30, nullable: false, comment: "Telefono del proveedor")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Proveedor", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Rol",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nombre = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Nombre del rol")
                 },
                 constraints: table =>
@@ -53,7 +87,8 @@ namespace Persistence.Data.Migrations
                 name: "Tipo Movimiento",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Descripcion = table.Column<string>(type: "varchar", maxLength: 150, nullable: false, comment: "Descripcion del tipo de movimiento")
                 },
                 constraints: table =>
@@ -65,7 +100,8 @@ namespace Persistence.Data.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Mail = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Correo del usuario"),
                     Username = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Nombre del usuario"),
                     Password = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Contraseña del usuario")
@@ -76,11 +112,28 @@ namespace Persistence.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Veterinario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nombre = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Nombre del veterinario"),
+                    Email = table.Column<string>(type: "varchar", maxLength: 150, nullable: false, comment: "Correo electronico del veterinario"),
+                    Telefono = table.Column<string>(type: "varchar", maxLength: 30, nullable: false, comment: "Telefono del veterinario"),
+                    Especialidad = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Especialidad del veterinario")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Veterinario", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Raza",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
-                    IdEspecieFK = table.Column<string>(type: "text", nullable: true),
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IdEspecieFK = table.Column<int>(type: "integer", nullable: false),
                     Nombre = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Nombre de la raza")
                 },
                 constraints: table =>
@@ -90,18 +143,20 @@ namespace Persistence.Data.Migrations
                         name: "FK_Raza_Especie_IdEspecieFK",
                         column: x => x.IdEspecieFK,
                         principalTable: "Especie",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Medicamento",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nombre = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Nombre del medicamento"),
-                    StockDisponible = table.Column<int>(type: "int", nullable: false, comment: "Cantidad disponible del medicamento"),
+                    Stock = table.Column<int>(type: "int", nullable: false, comment: "Cantidad disponible del medicamento"),
                     Precio = table.Column<decimal>(type: "decimal", nullable: false, comment: "Precio del medicamento"),
-                    IdLaboratorioFK = table.Column<string>(type: "text", nullable: true)
+                    IdLaboratorioFK = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,58 +165,41 @@ namespace Persistence.Data.Migrations
                         name: "FK_Medicamento_Laboratorio_IdLaboratorioFK",
                         column: x => x.IdLaboratorioFK,
                         principalTable: "Laboratorio",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Propietario",
+                name: "MovimientoMedicamento",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
-                    Nombre = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Nombre del propietario"),
-                    Email = table.Column<string>(type: "varchar", maxLength: 150, nullable: false, comment: "Correo electronico del propietario"),
-                    Telefono = table.Column<string>(type: "varchar", maxLength: 30, nullable: false, comment: "Telefono del propietario"),
-                    IdUserFK = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Fecha = table.Column<LocalDateTime>(type: "timestamp without time zone", nullable: false, comment: "Fecha del movimiento"),
+                    Total = table.Column<int>(type: "int", nullable: false, comment: "Total del movimiento"),
+                    IdTipoMovimientoFK = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Propietario", x => x.Id);
+                    table.PrimaryKey("PK_MovimientoMedicamento", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Propietario_User_IdUserFK",
-                        column: x => x.IdUserFK,
-                        principalTable: "User",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Proveedor",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
-                    Nombre = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Nombre del proveedor"),
-                    Direccion = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Direccion del proveedor"),
-                    Telefono = table.Column<string>(type: "varchar", maxLength: 30, nullable: false, comment: "Telefono del proveedor"),
-                    IdUserFK = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Proveedor", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Proveedor_User_IdUserFK",
-                        column: x => x.IdUserFK,
-                        principalTable: "User",
-                        principalColumn: "Id");
+                        name: "FK_MovimientoMedicamento_Tipo Movimiento_IdTipoMovimientoFK",
+                        column: x => x.IdTipoMovimientoFK,
+                        principalTable: "Tipo Movimiento",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "RefreshToken",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
-                    IdUserFK = table.Column<string>(type: "text", nullable: true),
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IdUserFK = table.Column<int>(type: "integer", nullable: false),
                     Token = table.Column<string>(type: "varchar", maxLength: 255, nullable: false, comment: "Token del usuario"),
-                    Expires = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "Expiracion del token"),
-                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "Creacion del token")
+                    Expires = table.Column<LocalDateTime>(type: "timestamp without time zone", nullable: false, comment: "Expiracion del token"),
+                    Created = table.Column<LocalDateTime>(type: "timestamp without time zone", nullable: false, comment: "Creacion del token")
                 },
                 constraints: table =>
                 {
@@ -170,15 +208,16 @@ namespace Persistence.Data.Migrations
                         name: "FK_RefreshToken_User_IdUserFK",
                         column: x => x.IdUserFK,
                         principalTable: "User",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "UserRol",
                 columns: table => new
                 {
-                    IdUserFK = table.Column<string>(type: "text", nullable: false),
-                    IdRolFK = table.Column<string>(type: "text", nullable: false)
+                    IdUserFK = table.Column<int>(type: "integer", nullable: false),
+                    IdRolFK = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -198,94 +237,39 @@ namespace Persistence.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Veterinario",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
-                    Nombre = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Nombre del veterinario"),
-                    Email = table.Column<string>(type: "varchar", maxLength: 150, nullable: false, comment: "Correo electronico del veterinario"),
-                    Telefono = table.Column<string>(type: "varchar", maxLength: 30, nullable: false, comment: "Telefono del veterinario"),
-                    Especialidad = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Especialidad del veterinario"),
-                    IdUserFK = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Veterinario", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Veterinario_User_IdUserFK",
-                        column: x => x.IdUserFK,
-                        principalTable: "User",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Mascota",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
-                    IdPropietarioFK = table.Column<string>(type: "text", nullable: true),
-                    IdEspecieFK = table.Column<string>(type: "text", nullable: true),
-                    IdRazaFK = table.Column<string>(type: "text", nullable: true),
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IdPropietarioFK = table.Column<int>(type: "integer", nullable: false),
+                    IdRazaFK = table.Column<int>(type: "integer", nullable: false),
                     Nombre = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Nombre de la mascota"),
-                    FechaNacimiento = table.Column<string>(name: "Fecha Nacimiento", type: "text", nullable: false, comment: "Fecha de nacimiento de la mascota")
+                    FechaNacimiento = table.Column<LocalDate>(name: "Fecha Nacimiento", type: "date", nullable: false, comment: "Fecha de nacimiento de la mascota")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Mascota", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Mascota_Especie_IdEspecieFK",
-                        column: x => x.IdEspecieFK,
-                        principalTable: "Especie",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Mascota_Propietario_IdPropietarioFK",
                         column: x => x.IdPropietarioFK,
                         principalTable: "Propietario",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Mascota_Raza_IdRazaFK",
                         column: x => x.IdRazaFK,
                         principalTable: "Raza",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MovimientoMedicamento",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
-                    Fecha = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "Fecha del movimiento"),
-                    IdMedicamentoFK = table.Column<string>(type: "text", nullable: true),
-                    IdPropietarioFK = table.Column<string>(type: "text", nullable: true),
-                    Total = table.Column<int>(type: "int", nullable: false, comment: "Total del movimiento"),
-                    IdTipoMovimientoFK = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MovimientoMedicamento", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MovimientoMedicamento_Medicamento_IdMedicamentoFK",
-                        column: x => x.IdMedicamentoFK,
-                        principalTable: "Medicamento",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_MovimientoMedicamento_Propietario_IdPropietarioFK",
-                        column: x => x.IdPropietarioFK,
-                        principalTable: "Propietario",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_MovimientoMedicamento_Tipo Movimiento_IdTipoMovimientoFK",
-                        column: x => x.IdTipoMovimientoFK,
-                        principalTable: "Tipo Movimiento",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "ProveedorMedicamento",
                 columns: table => new
                 {
-                    IdMedicamentoFK = table.Column<string>(type: "text", nullable: false),
-                    IdProveedorFK = table.Column<string>(type: "text", nullable: false)
+                    IdMedicamentoFK = table.Column<int>(type: "integer", nullable: false),
+                    IdProveedorFK = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -305,39 +289,14 @@ namespace Persistence.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cita",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
-                    IdMascotaFK = table.Column<string>(type: "text", nullable: true),
-                    Fecha = table.Column<DateOnly>(type: "date", nullable: false, comment: "Fecha de la cita"),
-                    Hora = table.Column<TimeSpan>(type: "time", nullable: false, comment: "Hora de la cita"),
-                    Motivo = table.Column<string>(type: "varchar", maxLength: 150, nullable: false, comment: "Motivo de la cita"),
-                    IdVeterinarioFK = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cita", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Cita_Mascota_IdMascotaFK",
-                        column: x => x.IdMascotaFK,
-                        principalTable: "Mascota",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Cita_Veterinario_IdVeterinarioFK",
-                        column: x => x.IdVeterinarioFK,
-                        principalTable: "Veterinario",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DetalleMovimiento",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
-                    IdMedicamentoFK = table.Column<string>(type: "text", nullable: true),
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IdMedicamentoFK = table.Column<int>(type: "integer", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false, comment: "Cantidad del movimiento"),
-                    IdMovMedFK = table.Column<string>(type: "text", nullable: true),
+                    IdMovMedFK = table.Column<int>(type: "integer", nullable: false),
                     Precio = table.Column<decimal>(type: "decimal", nullable: false, comment: "Precio del movimiento")
                 },
                 constraints: table =>
@@ -347,23 +306,55 @@ namespace Persistence.Data.Migrations
                         name: "FK_DetalleMovimiento_Medicamento_IdMedicamentoFK",
                         column: x => x.IdMedicamentoFK,
                         principalTable: "Medicamento",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_DetalleMovimiento_MovimientoMedicamento_IdMovMedFK",
                         column: x => x.IdMovMedFK,
                         principalTable: "MovimientoMedicamento",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cita",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IdMascotaFK = table.Column<int>(type: "integer", nullable: false),
+                    Fecha = table.Column<LocalDate>(type: "date", nullable: false, comment: "Fecha de la cita"),
+                    Hora = table.Column<LocalTime>(type: "time", nullable: false, comment: "Hora de la cita"),
+                    Motivo = table.Column<string>(type: "varchar", maxLength: 150, nullable: false, comment: "Motivo de la cita"),
+                    IdVeterinarioFK = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cita", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cita_Mascota_IdMascotaFK",
+                        column: x => x.IdMascotaFK,
+                        principalTable: "Mascota",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Cita_Veterinario_IdVeterinarioFK",
+                        column: x => x.IdVeterinarioFK,
+                        principalTable: "Veterinario",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "TratamientoMedico",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false, defaultValueSql: "substring(gen_random_uuid()::text, 1, 7)"),
-                    IdCitaFK = table.Column<string>(type: "text", nullable: true),
-                    IdMedicamentoFK = table.Column<string>(type: "text", nullable: true),
+                    Id = table.Column<int>(type: "integer", maxLength: 3, nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IdCitaFK = table.Column<int>(type: "integer", nullable: false),
+                    IdMedicamentoFK = table.Column<int>(type: "integer", nullable: false),
                     Dosis = table.Column<string>(type: "varchar", maxLength: 50, nullable: false, comment: "Dosis del tratamiento medico"),
-                    DetalleConsumo = table.Column<string>(type: "varchar", maxLength: 150, nullable: false, comment: "Detalles del consumo de la dosis"),
+                    FechaAdministracion = table.Column<LocalDateTime>(type: "timestamp without time zone", nullable: false, comment: "Fecha de administracion"),
                     Observacion = table.Column<string>(type: "varchar", maxLength: 150, nullable: false, comment: "Observaciones del tratamiento medico")
                 },
                 constraints: table =>
@@ -373,12 +364,14 @@ namespace Persistence.Data.Migrations
                         name: "FK_TratamientoMedico_Cita_IdCitaFK",
                         column: x => x.IdCitaFK,
                         principalTable: "Cita",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TratamientoMedico_Medicamento_IdMedicamentoFK",
                         column: x => x.IdMedicamentoFK,
                         principalTable: "Medicamento",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -402,11 +395,6 @@ namespace Persistence.Data.Migrations
                 column: "IdMovMedFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Mascota_IdEspecieFK",
-                table: "Mascota",
-                column: "IdEspecieFK");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Mascota_IdPropietarioFK",
                 table: "Mascota",
                 column: "IdPropietarioFK");
@@ -422,29 +410,9 @@ namespace Persistence.Data.Migrations
                 column: "IdLaboratorioFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MovimientoMedicamento_IdMedicamentoFK",
-                table: "MovimientoMedicamento",
-                column: "IdMedicamentoFK");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MovimientoMedicamento_IdPropietarioFK",
-                table: "MovimientoMedicamento",
-                column: "IdPropietarioFK");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MovimientoMedicamento_IdTipoMovimientoFK",
                 table: "MovimientoMedicamento",
                 column: "IdTipoMovimientoFK");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Propietario_IdUserFK",
-                table: "Propietario",
-                column: "IdUserFK");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Proveedor_IdUserFK",
-                table: "Proveedor",
-                column: "IdUserFK");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProveedorMedicamento_IdMedicamentoFK",
@@ -475,11 +443,6 @@ namespace Persistence.Data.Migrations
                 name: "IX_UserRol_IdRolFK",
                 table: "UserRol",
                 column: "IdRolFK");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Veterinario_IdUserFK",
-                table: "Veterinario",
-                column: "IdUserFK");
         }
 
         /// <inheritdoc />
@@ -510,10 +473,13 @@ namespace Persistence.Data.Migrations
                 name: "Cita");
 
             migrationBuilder.DropTable(
+                name: "Medicamento");
+
+            migrationBuilder.DropTable(
                 name: "Rol");
 
             migrationBuilder.DropTable(
-                name: "Medicamento");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Tipo Movimiento");
@@ -532,9 +498,6 @@ namespace Persistence.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Raza");
-
-            migrationBuilder.DropTable(
-                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Especie");
