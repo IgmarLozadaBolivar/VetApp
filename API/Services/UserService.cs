@@ -185,8 +185,16 @@ public class UserService : IUserService
         if (refreshTokenEncontrado == null)
             return new RefreshTokenResponse { Result = false, Msg = "No existe el token ingresado" };
 
-        var user = await _context.Users.FindAsync(refreshTokenEncontrado.IdUserFK);
+        var user = await _context.Users
+            .Include(u => u.Rols)
+            .FirstOrDefaultAsync(u => u.Id == idUser);
+
+        if (user == null)
+            return new RefreshTokenResponse { Result = false, Msg = "Usuario no encontrado" };
+
         var roles = user.Rols.Select(r => r.Nombre).ToList();
+
+        // Aquí puedes configurar la generación del token con los claims necesarios
         var tokenCreado = GenerarToken(idUser.ToString(), roles);
 
         refreshTokenEncontrado.Token = tokenCreado;
