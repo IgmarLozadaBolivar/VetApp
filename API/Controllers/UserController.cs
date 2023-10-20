@@ -11,6 +11,7 @@ namespace API.Controllers;
 
 [Route("[controller]")]
 public class UserController : ControllerBase
+
 {
     private readonly DbAppContext _context;
     private readonly IUserService _userService;

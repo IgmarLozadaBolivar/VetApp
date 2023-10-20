@@ -32,8 +32,8 @@
 𐤏 Debe restringir las peticiones a los endpoints según los roles de los usuarios. ✔ <br>
 𐤏 Se debe permitir realizar procesos de creacion, edicion, eliminacion y listado de informacion de cada una de las tablas. ✔ <br>
 𐤏 El backend debe permitir restringir peticiones consecutivos usando tecnicas de limitacion por IP. ✔ <br>
-𐤏 El backend debe permitir realizar la paginacion en  las peticiones get de todos los controladores. 🛠 <br>
-𐤏 Los controladores deben implementar 2 versiones diferentes (Query y Header). 🛠 <br>
+𐤏 El backend debe permitir realizar la paginacion en  las peticiones get de todos los controladores. ❌ <br>❌
+𐤏 Los controladores deben implementar 2 versiones diferentes (Query y Header). ❌ <br>
 
 <!-- Seccion 3 -->
 <h3>Realizar las siguientes consultas Principales:</h3>
@@ -77,6 +77,9 @@ Nota: Se debe mostrar una lista de las razas y la cantidad de mascotas que perte
 - Microsoft.EntityFrameworkCore - v7.0.12 <br>
 - Npgsql.EntityFrameworkCore.PostgreSQL - v7.0.11 <br>
 - Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime - v7.0.11 <br>
+
+<h4>Pasos a Seguir:</h4>
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"><br>
 
 <!-- Footer -->
 <h5>Autores:</h5>
