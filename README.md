@@ -79,7 +79,24 @@ Nota: Se debe mostrar una lista de las razas y la cantidad de mascotas que perte
 - Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime - v7.0.11 <br>
 
 <h4>Pasos a Seguir:</h4>
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"><br>
+<p>Usuarios por defecto</p>
+<img src="./assets/usuarios.png"><br>
+
+<p>Registro de usuario</p>
+<img src="./assets/registro.png"><br>
+
+<p>Loguarse para obetner token</p>
+<img src="./assets/logueo.png"><br>
+
+<p>Consultas resguardas por tipo de autenticacion con Bearer Token</p>
+<img src="./assets/tipoToken.png"><br>
+
+<p>Ingreso de Token</p>
+<img src="./assets/token.png"><br>
+
+<p>Consultas especiales de Usuario</p>
+<img src="./assets/especiales
+.png"><br>
 
 <!-- Footer -->
 <h5>Autores:</h5>
