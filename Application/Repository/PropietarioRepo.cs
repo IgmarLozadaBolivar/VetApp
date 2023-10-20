@@ -90,4 +90,37 @@ public class PropietarioRepo : GenericRepo<Propietario>, IPropietario
         if (movimientoMedicamentos != null)
         { }
     }
+
+    public virtual async Task<(int totalRegistros,object registros)> MascotasGoldenRetriever(int pageIndez, int pageSize, string search)
+    {
+        var query = 
+        from p in _context.Propietarios
+        select new
+        {
+            Nombre = p.Nombre,
+            Email = p.Email,
+            Telefono = p.Telefono,
+            Mascotas = (from m in _context.Mascotas
+                        where m.IdPropietarioFK == p.Id
+                        select new
+                        {
+                            NombreMascota = m.Nombre,
+                            FechaNacimiento = m.FechaNac
+                        }).ToList()
+        };
+        
+        if(!string.IsNullOrEmpty(search))
+        {
+            query = query.Where(p => p.Nombre.ToLower().Contains(search));
+        }
+
+        query = query.OrderBy(p => p.Nombre);
+        var totalRegistros = await query.CountAsync();
+        var registros = await query 
+            .Skip((pageIndez - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (totalRegistros, registros);
+    }
 }

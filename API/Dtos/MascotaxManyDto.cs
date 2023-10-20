@@ -1,3 +1,5 @@
+using NodaTime;
+
 namespace API.Dtos;
 
 public class MascotaxManyDto
@@ -7,5 +9,5 @@ public class MascotaxManyDto
     public EspecieDto especies { get; set; }
     public RazaDto razas { get; set; }
     public string Nombre { get; set; }
-    public string FechaNac { get; set; }
+    public LocalDate FechaNac { get; set; }
 }

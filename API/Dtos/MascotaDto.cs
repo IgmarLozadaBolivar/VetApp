@@ -1,4 +1,5 @@
 using Domain.Entities;
+using NodaTime;
 namespace API.Dtos;
 
 public class MascotaDto : BaseEntity
@@ -8,5 +9,5 @@ public class MascotaDto : BaseEntity
     public int IdEspecieFK { get; set; }
     public int IdRazaFK { get; set; }
     public string Nombre { get; set; }
-    public string FechaNac { get; set; }
+    public LocalDate FechaNac { get; set; }
 }

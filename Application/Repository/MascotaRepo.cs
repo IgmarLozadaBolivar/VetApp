@@ -28,24 +28,17 @@ public class MascotaRepo : GenericRepo<Mascota>, IMascota
         .FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public virtual async Task<object> MascotasEspeciesFelinas()
+    public virtual async Task<IEnumerable<Mascota>> MascotasEspeciesFelinas()
     {
-
-        var Mascotas = await (
+        var mascotasFelinas = await (
             from m in _context.Mascotas
             join r in _context.Razas on m.IdRazaFK equals r.Id
-            join p in _context.Propietarios on m.IdPropietarioFK equals p.Id
             join e in _context.Especies on r.IdEspecieFK equals e.Id
             where e.Nombre.Contains("Felina")
-            select new
-            {
-                Nombre = m.Nombre,
-                Propietario = p.Nombre,
-                FechaNacimiento = m.FechaNac
-            }).Distinct()
-            .ToListAsync();
+            select m
+        ).Distinct().ToListAsync();
 
-        return Mascotas;
+        return mascotasFelinas;
     }
 
     public async Task<IEnumerable<Mascota>> MascotasVacunacionPrimerTrimestre2023()
@@ -88,13 +81,13 @@ public class MascotaRepo : GenericRepo<Mascota>, IMascota
 
     public async Task<object> MascotaAtendidaPorVeterinario()
     {
-        var mascotasAtendidas = 
-        from e in _context.Citas 
+        var mascotasAtendidas =
+        from e in _context.Citas
         join v in _context.Veterinarios on e.IdVeterinarioFK equals v.Id
         select new
         {
             veterinario = v.Nombre,
-            mascotas = (from c in _context.Citas 
+            mascotas = (from c in _context.Citas
                         join m in _context.Mascotas on c.IdMascotaFK equals m.Id
                         where c.IdVeterinarioFK == v.Id
                         select new

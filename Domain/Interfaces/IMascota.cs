@@ -4,7 +4,7 @@ namespace Domain.Interfaces;
 public interface IMascota : IGenericRepo<Mascota>
 {
     // * Consultas
-    Task<object> MascotasEspeciesFelinas();
+    Task<IEnumerable<Mascota>> MascotasEspeciesFelinas();
     Task<IEnumerable<Mascota>> MascotasVacunacionPrimerTrimestre2023();
     Task<object> EspeciesMascotas();
     Task<object> MascotaAtendidaPorVeterinario();

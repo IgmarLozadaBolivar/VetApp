@@ -10,4 +10,5 @@ public interface IPropietario : IGenericRepo<Propietario>
     // * Paginacion
     Task LoadMascotasAsync(int veterinarioId);
     Task LoadMovimientoMedicamentosAsync(int veterinarioId);
+    Task<(int totalRegistros, object registros)> MascotasGoldenRetriever(int pageIndez, int pageSize, string search);
 }

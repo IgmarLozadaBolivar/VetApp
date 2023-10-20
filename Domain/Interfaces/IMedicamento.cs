@@ -9,4 +9,6 @@ public interface IMedicamento : IGenericRepo<Medicamento>
 
     // * Metodo para paginacion
     Task LoadLaboratoriosAsync(Medicamento medicamento);
+
+    Task<(int totalRegistros, object registros)> MedicamentosLaboratoriosGenfar(int pageIndez, int pageSize, string search);
 }

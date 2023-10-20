@@ -65,13 +65,25 @@ public class MedicamentoController : BaseApiController
     }
 
     [HttpGet("medicamentosGenfar")]
-    [Authorize(Roles = "Administrador, Empleado")]
+    [MapToApiVersion("1.0")]
+    /* [Authorize(Roles = "Administrador, Empleado")] */
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<MedicamentoDto>>> MedicamentosLaboratoriosGenfar()
     {
         var medicamentosGenfar = await unitOfWork.Medicamentos.MedicamentosLaboratoriosGenfar();
         return mapper.Map<List<MedicamentoDto>>(medicamentosGenfar);
+    }
+
+    [HttpGet("medicamentosGenfar")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<MedicamentoxManyDto>>> Consulta2APag([FromQuery] Params medicamentoParams)
+    {
+        var entidad = await unitOfWork.Medicamentos.MedicamentosLaboratoriosGenfar(medicamentoParams.PageIndex, medicamentoParams.PageSize, medicamentoParams.Search);
+        var listEntidad = mapper.Map<List<MedicamentoxManyDto>>(entidad.registros);
+        return new Pager<MedicamentoxManyDto>(listEntidad, entidad.totalRegistros, medicamentoParams.PageIndex, medicamentoParams.PageSize, medicamentoParams.Search);
     }
 
     [HttpGet("precioMayorA50k")]
